@@ -82,3 +82,40 @@ If both are healthy, open the web URL and run:
 - Template-Locked conversion flow
 - Creative NOG generation flow
 - Jobs download/delete flow
+
+
+## GitHub Pages UI (simple control panel)
+
+If you want a pure static UI on GitHub Pages, use `docs/index.html`.
+
+### Enable GitHub Pages
+1. Push this repo to GitHub.
+2. In repo settings -> Pages, set source to `main` (or `work`) branch, folder `/docs`.
+3. Open `https://<user>.github.io/<repo>/`.
+
+### Important
+GitHub Pages only hosts the UI. Jobs run on your deployed backend services.
+In the page, set **API Base URL** to your deployed API (example: `https://nog-api.onrender.com/api`).
+
+From that UI you can:
+- Run Template-Locked conversion
+- Run Creative NOG generation
+- Track/download/delete jobs
+- Inspect SlideSpec JSON
+
+
+## Creative process and rule enforcement
+
+When you upload an old deck in Creative NOG mode, the system stores the file in the job folder and uses it as a **reference source** (not a strict visual copy).
+
+Pipeline used:
+1. Extract DeckModel (title, slide titles, bullets, raw text blocks).
+2. Classify slide intent (rules-first; OpenAI optional).
+3. Generate SlideSpec JSON (template type, motif, palette map, text blocks, animation sequence).
+4. Validate + auto-fix constraints:
+   - Only allowed NOG palette colours (+ near-white for readability)
+   - Minimum text sizes (title >= 32pt, body >= 24pt)
+   - Split overflow content into part 2 slide
+5. Deterministic renderer converts SlideSpec -> PPTX.
+
+This means you get creativity while still staying inside guardrails and repeatable output logic.

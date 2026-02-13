@@ -4,6 +4,166 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NOG Deck Studio</title>
+  <style>
+    :root {
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --primary: #0f172a;
+      --cyan: #0e7490;
+      --green: #047857;
+      --border: #e2e8f0;
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .container { max-width: 1120px; margin: 0 auto; padding: 16px; }
+    .stack { display: grid; gap: 14px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 2px 8px rgba(15,23,42,0.06);
+      animation: fadeUp .28s ease both;
+    }
+    .hero {
+      color: white;
+      border: none;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0e7490 100%);
+      box-shadow: 0 10px 24px rgba(2,6,23,0.24);
+    }
+    .hero h1 { margin: 6px 0 8px; font-size: 2rem; }
+    .muted { color: var(--muted); }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 10px; border-radius: 999px; background: rgba(255,255,255,.14);
+      font-size: 0.9rem;
+    }
+    .dot { width: 8px; height: 8px; border-radius: 999px; background: #34d399; }
+
+    .row { display: grid; gap: 8px; }
+    .grid-2 { display: grid; gap: 12px; grid-template-columns: 1fr; }
+    .grid-3 { display: grid; gap: 8px; grid-template-columns: 1fr; }
+    @media (min-width: 900px) {
+      .grid-2 { grid-template-columns: 1fr 1fr; }
+      .grid-3 { grid-template-columns: repeat(3,1fr); }
+      .container { padding: 24px; }
+    }
+
+    label { font-size: .9rem; font-weight: 600; }
+    input, select, textarea, button {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid #cbd5e1;
+      font-size: .95rem;
+      padding: 10px 12px;
+      font: inherit;
+    }
+    input, select, textarea { background: #fff; color: #0f172a; }
+    textarea { min-height: 120px; resize: vertical; }
+    button { cursor: pointer; border: none; color: white; font-weight: 600; }
+    .btn-dark { background: var(--primary); }
+    .btn-cyan { background: var(--cyan); }
+    .btn-green { background: var(--green); }
+
+    .jobs { display: grid; gap: 8px; margin-top: 10px; }
+    .job {
+      border: 1px solid var(--border); border-radius: 12px; padding: 10px;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      flex-wrap: wrap;
+    }
+    .job-actions { display: flex; align-items: center; gap: 10px; }
+    .job-actions button { width: auto; padding: 6px 10px; color: #334155; background: #f8fafc; border: 1px solid #cbd5e1; }
+    .job-actions .delete { color: #b91c1c; }
+    a.link { color: #1d4ed8; text-decoration: underline; font-size: .9rem; }
+
+    details { border: 1px solid var(--border); border-radius: 12px; padding: 10px; }
+    pre {
+      background: #020617; color: #e2e8f0; border-radius: 10px;
+      padding: 10px; overflow: auto; max-height: 220px;
+    }
+
+    .small { font-size: .9rem; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(8px);} to {opacity:1; transform: translateY(0);} }
+  </style>
+</head>
+<body>
+  <main id="app" class="container stack">
+    <section class="card hero">
+      <p class="small" style="letter-spacing:.14em; text-transform:uppercase; color:#7dd3fc; margin:0;">NOG Deck Studio</p>
+      <h1>Simple deck converter & creator</h1>
+      <p style="margin:0 0 12px; color:#e2e8f0">Upload your old PowerPoint and generate a cleaner, creative version safely inside NOG colour rules.</p>
+      <div class="pill"><span class="dot"></span><span id="statusText">Choose a connection option below</span></div>
+    </section>
+
+    <section class="card row">
+      <h2 style="margin:0">Quick Connect (one click)</h2>
+      <p class="small muted" style="margin:0">Use one of these buttons so you do not need to manually type URLs.</p>
+      <div class="grid-3">
+        <button id="btnRecommended" class="btn-dark">Use recommended cloud API</button>
+        <button id="btnLocal" class="btn-cyan">Use local API (localhost)</button>
+        <button id="btnHealth" class="btn-green">Check connection</button>
+      </div>
+      <details>
+        <summary><strong>Advanced: custom API URL</strong></summary>
+        <div class="grid-2" style="margin-top:8px;">
+          <input id="apiBase" placeholder="https://.../api" />
+          <button id="btnSaveCustom" class="btn-dark">Save custom URL</button>
+        </div>
+      </details>
+      <p id="health" class="small" style="margin:0"></p>
+    </section>
+
+    <section class="grid-2">
+      <div class="card row">
+        <h2 style="margin:0">1) Create new creative deck</h2>
+        <p class="small muted" style="margin:0">Recommended flow: upload old PPTX as reference and click Generate.</p>
+        <label for="category">Category Group</label>
+        <select id="category">
+          <option>All Incident Fires</option>
+        </select>
+        <label for="creativity">Creativity</label>
+        <select id="creativity">
+          <option>Low</option><option selected>Med</option><option>High</option>
+        </select>
+        <label for="creativeOld">Reference old PPTX</label>
+        <input id="creativeOld" type="file" accept=".pptx" />
+        <details>
+          <summary><strong>Optional: use outline text instead of a PPTX</strong></summary>
+          <textarea id="outline" placeholder="Paste outline text here"></textarea>
+        </details>
+        <button id="btnGenerateCreative" class="btn-green">Generate Creative Deck</button>
+      </div>
+
+      <div class="card row">
+        <h2 style="margin:0">2) Template-Locked conversion</h2>
+        <p class="small muted" style="margin:0">Use this when you must preserve an existing template style.</p>
+        <label for="oldPptx">Old PPTX</label>
+        <input id="oldPptx" type="file" accept=".pptx" />
+        <label for="tplPptx">Template PPTX</label>
+        <input id="tplPptx" type="file" accept=".pptx" />
+        <button id="btnConvertTemplate" class="btn-cyan">Convert Using Template</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap;">
+        <h2 style="margin:0">Jobs</h2>
+        <button id="btnRefreshJobs" class="btn-dark" style="width:auto; padding:8px 12px;">Refresh</button>
+      </div>
+      <div id="jobs" class="jobs"></div>
+    </section>
+
+    <details class="card">
+      <summary><strong>Technical log</strong></summary>
+      <pre id="log"></pre>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 </head>
@@ -146,6 +306,7 @@
 (() => {
   const app = document.getElementById('app')
   const $ = (id) => app.querySelector('#' + id)
+  const FALLBACK_CATEGORIES = ['All Incident Fires','Rescues','HAZMATS','Transportation','Breathing Apparatus','All Categories']
   const FALLBACK_CATEGORIES = [
     'All Incident Fires',
     'Rescues',
@@ -158,6 +319,13 @@
 
   const getApi = () => (localStorage.getItem('nog_api_base') || '').replace(/\/$/, '')
   const setApi = (url) => {
+    const clean = (url || '').trim().replace(/\/$/, '')
+    localStorage.setItem('nog_api_base', clean)
+    $('apiBase').value = clean
+    $('statusText').textContent = clean ? `Connected target: ${clean}` : 'Choose a connection option below'
+  }
+
+  const log = (msg) => { $('log').textContent = `${new Date().toISOString()} ${msg}\n` + $('log').textContent }
     const clean = url.replace(/\/$/, '')
     localStorage.setItem('nog_api_base', clean)
     $('apiBase').value = clean
@@ -175,6 +343,21 @@
     return false
   }
 
+  const renderFallbackCategories = () => {
+    $('category').innerHTML = FALLBACK_CATEGORIES.map((name) => `<option>${name}</option>`).join('')
+  }
+
+  const loadCategories = async () => {
+    if (!ensureApi()) return renderFallbackCategories()
+    try {
+      const r = await fetch(`${getApi()}/categories`)
+      if (!r.ok) throw new Error(`HTTP ${r.status}`)
+      const d = await r.json()
+      const names = (d.groups || []).map((g) => g.name).filter(Boolean)
+      $('category').innerHTML = (names.length ? names : FALLBACK_CATEGORIES).map((name) => `<option>${name}</option>`).join('')
+    } catch (e) {
+      log('Categories load failed: ' + e.message)
+      renderFallbackCategories()
   const loadCategories = async () => {
     if (!ensureApi()) return
     try {
@@ -195,6 +378,7 @@
     if (!ensureApi()) return
     try {
       const r = await fetch(`${getApi()}/health`)
+      if (!r.ok) throw new Error(`HTTP ${r.status}`)
       const d = await r.json()
       $('health').textContent = `✅ API healthy: ${JSON.stringify(d)}`
     } catch (e) {
@@ -213,6 +397,7 @@
       const d = await r.json()
       log('Template-Locked job created: ' + JSON.stringify(d))
       refreshJobs()
+    } catch (e) { log('Template-Locked failed: ' + e.message) }
     } catch (e) {
       log('Template-Locked failed: ' + e.message)
     }
@@ -233,6 +418,7 @@
       const d = await r.json()
       log('Creative job created: ' + JSON.stringify(d))
       refreshJobs()
+    } catch (e) { log('Creative generate failed: ' + e.message) }
     } catch (e) {
       log('Creative generate failed: ' + e.message)
     }
@@ -242,6 +428,16 @@
     if (!ensureApi()) return
     try {
       const r = await fetch(`${getApi()}/jobs`)
+      if (!r.ok) throw new Error(`HTTP ${r.status}`)
+      const jobs = await r.json()
+      $('jobs').innerHTML = (jobs || []).map((j) => `<div class='job'>
+          <div><div><strong>${j.job_id}</strong></div><div class='small muted'>${j.status} (${j.progress || 0}%)</div></div>
+          <div class='job-actions'>
+            <a class='link' href='${getApi()}/jobs/${j.job_id}/download' target='_blank'>Download</a>
+            <button class='spec-btn' data-id='${j.job_id}'>Spec</button>
+            <button class='delete del-btn' data-id='${j.job_id}'>Delete</button>
+          </div>
+        </div>`).join('') || `<p class='small muted'>No jobs yet.</p>`
       const jobs = await r.json()
       $('jobs').innerHTML = jobs.map((j) => `<div class='p-3 border border-slate-200 rounded-xl flex items-center justify-between gap-2'>
         <div>
@@ -268,6 +464,7 @@
       }))
     } catch (e) {
       log('Jobs refresh failed: ' + e.message)
+      $('jobs').innerHTML = `<p class='small muted'>Could not load jobs yet.</p>`
     }
   }
 
@@ -285,6 +482,21 @@
   $('btnConvertTemplate').addEventListener('click', convertTemplateLocked)
   $('btnRefreshJobs').addEventListener('click', refreshJobs)
 
+
+  // Backward compatibility for any stale inline handlers served from cached/merged pages.
+  window.setApiPreset = (type) => { setApi(type === 'local' ? LOCAL_API : DEFAULT_API); loadCategories(); refreshJobs() }
+  window.convertCreative = convertCreative
+  window.convertTemplateLocked = convertTemplateLocked
+  window.refreshJobs = refreshJobs
+  window.checkHealth = checkHealth
+
+  setApi(getApi())
+  renderFallbackCategories()
+  if (getApi()) {
+    loadCategories()
+    refreshJobs()
+  }
+})()
   // Safety: remove any accidental duplicate IDs inside #app created by bad merges.
   const seenIds = new Set()
   app.querySelectorAll('[id]').forEach((el) => {

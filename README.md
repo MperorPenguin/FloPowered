@@ -104,6 +104,28 @@ From that UI you can:
 - Inspect SlideSpec JSON
 
 
+### If GitHub Pages still shows old UI
+- Confirm Pages source is branch `main` (or your active branch) + folder `/docs`.
+- Wait 1-3 minutes for Pages redeploy.
+- Hard refresh your browser (`Ctrl+Shift+R` / `Cmd+Shift+R`) to bypass cache.
+- Verify latest file is live by opening `https://<user>.github.io/<repo>/index.html`.
+
+### If Actions shows: `pages/telemetry ... The operation was canceled`
+This is usually **not a code failure**. It means a newer Pages deployment run was queued, so GitHub canceled the older one.
+
+Do this:
+- Ensure there is only one latest commit you want deployed on the Pages source branch.
+- Open **Actions -> pages build and deployment** and confirm the latest run finishes `success`.
+- If runs keep canceling, stop rapid consecutive pushes for a minute, then push once and wait.
+- If needed, trigger a fresh run by making a tiny commit to `docs/index.html` and pushing.
+
+Quick verification command:
+```bash
+curl -I https://<user>.github.io/<repo>/index.html
+```
+Then compare page content in browser with the latest `docs/index.html` in GitHub.
+
+
 ## Creative process and rule enforcement
 
 When you upload an old deck in Creative NOG mode, the system stores the file in the job folder and uses it as a **reference source** (not a strict visual copy).

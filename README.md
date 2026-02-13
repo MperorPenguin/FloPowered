@@ -95,6 +95,7 @@ If you want a pure static UI on GitHub Pages, use `docs/index.html`.
 
 ### Important
 GitHub Pages only hosts the UI. Jobs run on your deployed backend services.
+In the page, use **Quick Connect** (recommended cloud/local) and only use custom API URL in Advanced if needed.
 In the page, set **API Base URL** to your deployed API (example: `https://nog-api.onrender.com/api`).
 
 From that UI you can:

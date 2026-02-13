@@ -51,6 +51,9 @@
           <p class="text-sm text-slate-600">Recommended flow: upload old PPTX as reference and click Generate.</p>
         </div>
         <label class="text-sm font-medium">Category Group</label>
+        <select id="category" class="w-full border rounded-lg px-3 py-2 bg-white text-slate-900">
+          <option>All Incident Fires</option>
+        </select>
         <select id="category" class="w-full border rounded-lg px-3 py-2">
           <option>All Incident Fires</option>
         </select>
@@ -143,6 +146,13 @@
 (() => {
   const app = document.getElementById('app')
   const $ = (id) => app.querySelector('#' + id)
+  const FALLBACK_CATEGORIES = [
+    'All Incident Fires',
+    'Rescues',
+    'HAZMATS',
+    'Transportation',
+    'Breathing Apparatus'
+  ]
   const DEFAULT_API = 'https://nog-api.onrender.com/api'
   const LOCAL_API = 'http://localhost:8000/api'
 
@@ -171,6 +181,10 @@
       const r = await fetch(`${getApi()}/categories`)
       const d = await r.json()
       const options = (d.groups || []).map((g) => `<option>${g.name}</option>`).join('')
+      $('category').innerHTML = options || FALLBACK_CATEGORIES.map((name) => `<option>${name}</option>`).join('')
+    } catch (e) {
+      log('Categories load failed: ' + e.message)
+      $('category').innerHTML = FALLBACK_CATEGORIES.map((name) => `<option>${name}</option>`).join('')
       $('category').innerHTML = options || '<option>All Incident Fires</option>'
     } catch (e) {
       log('Categories load failed: ' + e.message)
@@ -271,6 +285,16 @@
   $('btnConvertTemplate').addEventListener('click', convertTemplateLocked)
   $('btnRefreshJobs').addEventListener('click', refreshJobs)
 
+  // Safety: remove any accidental duplicate IDs inside #app created by bad merges.
+  const seenIds = new Set()
+  app.querySelectorAll('[id]').forEach((el) => {
+    const id = el.id
+    if (seenIds.has(id)) el.remove()
+    else seenIds.add(id)
+  })
+
+  const stored = getApi()
+  if (stored) {
   const stored = getApi()
   if (stored) {
 const $ = (id) => document.getElementById(id)
@@ -398,6 +422,12 @@ async function spec(id){
     refreshJobs()
   }
 
+  if (window.gsap) {
+    gsap.fromTo(['#hero', '#quickConnect', '#creative', '#template', '#jobsCard', '#logCard'],
+      { opacity: 0, y: 16 },
+      { opacity: 1, y: 0, duration: 0.45, stagger: 0.06, ease: 'power2.out' })
+  }
+})()
   gsap.fromTo(['#hero', '#quickConnect', '#creative', '#template', '#jobsCard', '#logCard'],
     { opacity: 0, y: 16 },
     { opacity: 1, y: 0, duration: 0.45, stagger: 0.06, ease: 'power2.out' })

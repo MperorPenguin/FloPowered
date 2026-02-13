@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NOG Deck Studio – GitHub Pages UI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+<body class="bg-slate-100 text-slate-900 min-h-screen">
+  <main class="max-w-7xl mx-auto p-6 space-y-5">
+    <section id="hero" class="rounded-2xl bg-slate-900 text-white p-6 shadow-lg">
+      <p class="text-xs uppercase tracking-[0.2em] text-cyan-300">NOG Deck Studio</p>
+      <h1 class="text-4xl font-semibold mt-2">GitHub Pages Control UI</h1>
+      <p class="text-slate-300 mt-2">This page controls your deployed API/worker/renderer. Upload old PPTX, generate creative decks, and download results.</p>
+    </section>
+
+    <section id="connection" class="bg-white rounded-2xl p-5 shadow">
+      <h2 class="text-xl font-semibold">Connection</h2>
+      <p class="text-sm text-slate-600 mt-1">Set your deployed API base URL (example: <code>https://nog-api.onrender.com/api</code>).</p>
+      <div class="flex gap-2 mt-3">
+        <input id="apiBase" class="flex-1 border rounded-lg px-3 py-2" placeholder="https://.../api" />
+        <button onclick="saveApi()" class="px-4 py-2 rounded-lg bg-slate-900 text-white">Save API URL</button>
+        <button onclick="checkHealth()" class="px-4 py-2 rounded-lg bg-cyan-700 text-white">Check API Health</button>
+      </div>
+      <div id="health" class="text-sm mt-2 text-slate-700"></div>
+    </section>
+
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div id="tmpl" class="bg-white rounded-2xl p-5 shadow space-y-3">
+        <h2 class="text-2xl font-semibold">Template-Locked Convert</h2>
+        <p class="text-sm text-slate-600">Strict conversion mode.</p>
+        <input id="oldPptx" type="file" accept=".pptx" class="block w-full text-sm" />
+        <input id="tplPptx" type="file" accept=".pptx" class="block w-full text-sm" />
+        <button onclick="convertTemplateLocked()" class="px-4 py-2 rounded-lg bg-cyan-700 text-white">Convert</button>
+      </div>
+
+      <div id="creative" class="bg-white rounded-2xl p-5 shadow space-y-3">
+        <h2 class="text-2xl font-semibold">Creative NOG</h2>
+        <select id="category" class="w-full border rounded-lg px-3 py-2"></select>
+        <select id="creativity" class="w-full border rounded-lg px-3 py-2"><option>Low</option><option selected>Med</option><option>High</option></select>
+        <select id="inputType" onchange="toggleInput()" class="w-full border rounded-lg px-3 py-2"><option value="pptx">Old PPTX (reference)</option><option value="outline">Outline Text</option></select>
+        <input id="creativeOld" type="file" accept=".pptx" class="block w-full text-sm" />
+        <textarea id="outline" rows="5" placeholder="Outline text" class="w-full border rounded-lg px-3 py-2 hidden"></textarea>
+        <button onclick="convertCreative()" class="px-4 py-2 rounded-lg bg-emerald-700 text-white">Generate</button>
+      </div>
+    </section>
+
+    <section id="jobsCard" class="bg-white rounded-2xl p-5 shadow">
+      <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-semibold">Jobs</h2>
+        <button onclick="refreshJobs()" class="px-4 py-2 rounded-lg bg-slate-800 text-white">Refresh Jobs</button>
+      </div>
+      <div id="jobs" class="space-y-2 mt-3"></div>
+    </section>
+
+    <section id="logCard" class="bg-white rounded-2xl p-5 shadow">
+      <h2 class="text-2xl font-semibold">Log</h2>
+      <pre id="log" class="bg-slate-950 text-slate-100 text-xs p-3 rounded-lg mt-3 overflow-auto"></pre>
+    </section>
+  </main>
+
+<script>
+const $ = (id)=>document.getElementById(id)
+function api(){ return (localStorage.getItem('nog_api_base')||'').replace(/\/$/,'') }
+function log(msg){ $('log').textContent = `${new Date().toISOString()} ${msg}\n` + $('log').textContent }
+
+function saveApi(){ localStorage.setItem('nog_api_base',$('apiBase').value.trim()); log('API URL saved'); loadCategories(); refreshJobs(); }
+function toggleInput(){
+  const outline = $('inputType').value==='outline'
+  $('outline').classList.toggle('hidden', !outline)
+  $('creativeOld').classList.toggle('hidden', outline)
+}
+
+async function checkHealth(){
+  try{
+    const r = await fetch(`${api()}/health`)
+    const d = await r.json(); $('health').textContent = `API health: ${JSON.stringify(d)}`
+  }catch(e){ $('health').textContent = `Health failed: ${e.message}` }
+}
+
+async function loadCategories(){
+  if(!api()) return
+  try{
+    const r = await fetch(`${api()}/categories`); const d = await r.json();
+    $('category').innerHTML = (d.groups||[]).map(g=>`<option>${g.name}</option>`).join('')
+  }catch(e){log('Categories load failed: '+e.message)}
+}
+
+async function convertTemplateLocked(){
+  const fd = new FormData();
+  if(!$('oldPptx').files[0] || !$('tplPptx').files[0]) return log('Select both old and template PPTX first')
+  fd.append('old_pptx',$('oldPptx').files[0]);
+  fd.append('template_pptx',$('tplPptx').files[0]);
+  const r = await fetch(`${api()}/convert/template-locked`,{method:'POST',body:fd});
+  const d = await r.json(); log('Template job: '+JSON.stringify(d)); refreshJobs();
+}
+
+async function convertCreative(){
+  const fd = new FormData();
+  fd.append('category_group',$('category').value)
+  fd.append('creativity',$('creativity').value)
+  if($('inputType').value==='outline') fd.append('outline_text',$('outline').value)
+  else if($('creativeOld').files[0]) fd.append('old_pptx',$('creativeOld').files[0])
+  else return log('Select a reference old PPTX or switch to Outline Text')
+  const r = await fetch(`${api()}/convert/creative`,{method:'POST',body:fd});
+  const d = await r.json(); log('Creative job: '+JSON.stringify(d)); refreshJobs();
+}
+
+async function refreshJobs(){
+  if(!api()) return
+  const r = await fetch(`${api()}/jobs`); const jobs = await r.json();
+  $('jobs').innerHTML = jobs.map(j=>`<div class='p-3 border border-slate-200 rounded-xl flex items-center justify-between'>
+      <div><div class='font-medium'>${j.job_id}</div><div class='text-sm text-slate-600'>${j.status} (${j.progress||0}%)</div></div>
+      <div class='space-x-3'>
+        <a class='text-blue-700 underline' href='${api()}/jobs/${j.job_id}/download' target='_blank'>Download</a>
+        <button class='text-red-700' onclick="delJob('${j.job_id}')">Delete</button>
+        <button class='text-slate-700' onclick="spec('${j.job_id}')">Spec</button>
+      </div>
+    </div>`).join('')
+}
+
+async function delJob(id){ await fetch(`${api()}/jobs/${id}`,{method:'DELETE'}); refreshJobs(); }
+async function spec(id){ const r=await fetch(`${api()}/jobs/${id}/spec`); log(await r.text()) }
+
+(function init(){
+  $('apiBase').value = localStorage.getItem('nog_api_base') || '';
+  toggleInput();
+  if(api()) {loadCategories(); refreshJobs();}
+  gsap.fromTo(['#hero','#connection','#tmpl','#creative','#jobsCard','#logCard'], {opacity:0,y:18}, {opacity:1,y:0,duration:0.55,stagger:0.08,ease:'power2.out'})
+})();
+</script>
+</body>
+</html>

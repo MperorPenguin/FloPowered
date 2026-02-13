@@ -119,34 +119,6 @@ export default function Page() {
   }
 
   return (
-    <main className="flex bg-gradient-to-br from-slate-100 via-slate-100 to-cyan-50 min-h-screen">
-      <Nav tab={tab} setTab={setTab} />
-      <section className="p-7 flex-1 space-y-5">
-        <div ref={heroRef} className="rounded-2xl bg-slate-900 text-white p-6 shadow-lg">
-          <h2 className="text-3xl font-semibold">Create better decks with less effort</h2>
-          <p className="text-slate-300 mt-2">
-            Upload your old PowerPoint as reference, choose creativity level and NOG category, and the pipeline builds a fresh but rule-safe deck.
-          </p>
-        </div>
-
-        <div ref={(el) => { if (el) cardRefs.current[0] = el }} className="bg-white p-4 rounded-2xl shadow">
-          <h3 className="font-semibold text-lg">Connection Settings</h3>
-          <p className="text-sm text-slate-600">Works on GitHub Pages/static hosting: set your deployed API URL once.</p>
-          <div className="flex gap-2 mt-2">
-            <input className="border rounded-lg px-3 py-2 flex-1" value={apiBase} onChange={(e) => setApiBaseInput(e.target.value)} />
-            <button className="px-3 py-2 bg-slate-800 text-white rounded-lg" onClick={() => { setApiBase(apiBase); refreshCategories(); refreshJobs() }}>Save</button>
-            <button className="px-3 py-2 bg-cyan-700 text-white rounded-lg" onClick={checkHealth}>Check</button>
-          </div>
-          <div className="text-sm mt-2">API: <b>{health.api || 'not checked'}</b> · Renderer: <b>{health.renderer || 'not checked'}</b></div>
-        </div>
-
-        {tab === '0' && (
-          <form ref={(el) => { if (el) cardRefs.current[1] = el }} onSubmit={submitTemplate} className="bg-white p-6 rounded-2xl shadow space-y-3">
-            <h3 className="text-2xl font-semibold">Template-Locked conversion</h3>
-            <p className="text-sm text-slate-600">Strict mode: reuses template structure for consistency.</p>
-            <input name="old_pptx" type="file" accept=".pptx" required className="block" />
-            <input name="template_pptx" type="file" accept=".pptx" required className="block" />
-            <button className="px-4 py-2 bg-cyan-700 text-white rounded-lg">Convert</button>
     <main className="flex">
       <Nav tab={tab} setTab={setTab} />
       <section className="p-6 flex-1 space-y-4">
@@ -172,41 +144,6 @@ export default function Page() {
         )}
 
         {tab === '1' && (
-          <form ref={(el) => { if (el) cardRefs.current[1] = el }} onSubmit={submitCreative} className="bg-white p-6 rounded-2xl shadow space-y-3">
-            <h3 className="text-2xl font-semibold">Creative NOG conversion (recommended)</h3>
-            <p className="text-sm text-slate-600">Simple workflow: upload old PPTX as reference, we extract ideas and regenerate creatively under NOG rules.</p>
-
-            <label className="block text-sm font-medium">NOG Category</label>
-            <select value={cat} onChange={(e) => setCat(e.target.value)} className="border rounded-lg p-2 w-full">
-              {cats.map((c) => <option key={c.name}>{c.name}</option>)}
-            </select>
-            <div className="text-sm">Palette lock: {(selectedCat?.palette || []).join(', ')}</div>
-
-            <label className="block text-sm font-medium">Creativity</label>
-            <select value={creativity} onChange={(e) => setCreativity(e.target.value)} className="border rounded-lg p-2 w-full">
-              <option>Low</option><option>Med</option><option>High</option>
-            </select>
-
-            <label className="block text-sm font-medium">Old PowerPoint (reference)</label>
-            <input name="old_pptx" type="file" accept=".pptx" className="block" />
-
-            <button type="button" className="text-sm text-cyan-700 underline" onClick={() => setShowAdvanced((v) => !v)}>
-              {showAdvanced ? 'Hide advanced input' : 'Show advanced input (outline text)'}
-            </button>
-
-            {showAdvanced && (
-              <div className="space-y-2 border rounded-lg p-3 bg-slate-50">
-                <div>
-                  <label><input type="radio" checked={inputType === 'pptx'} onChange={() => setInputType('pptx')} /> Use uploaded PPTX</label>
-                  <label className="ml-3"><input type="radio" checked={inputType === 'outline'} onChange={() => setInputType('outline')} /> Use outline text</label>
-                </div>
-                {inputType === 'outline' && (
-                  <textarea name="outline_text" className="w-full border rounded-lg p-2 h-32" placeholder="Paste outline text" />
-                )}
-              </div>
-            )}
-
-            <button className="px-4 py-2 bg-emerald-700 text-white rounded-lg">Generate Creative Deck</button>
           <form onSubmit={submitCreative} className="bg-white p-6 rounded shadow space-y-3">
             <h2 className="text-2xl font-semibold">Creative NOG</h2>
             <label className="block">Category group

@@ -102,3 +102,20 @@ From that UI you can:
 - Run Creative NOG generation
 - Track/download/delete jobs
 - Inspect SlideSpec JSON
+
+
+## Creative process and rule enforcement
+
+When you upload an old deck in Creative NOG mode, the system stores the file in the job folder and uses it as a **reference source** (not a strict visual copy).
+
+Pipeline used:
+1. Extract DeckModel (title, slide titles, bullets, raw text blocks).
+2. Classify slide intent (rules-first; OpenAI optional).
+3. Generate SlideSpec JSON (template type, motif, palette map, text blocks, animation sequence).
+4. Validate + auto-fix constraints:
+   - Only allowed NOG palette colours (+ near-white for readability)
+   - Minimum text sizes (title >= 32pt, body >= 24pt)
+   - Split overflow content into part 2 slide
+5. Deterministic renderer converts SlideSpec -> PPTX.
+
+This means you get creativity while still staying inside guardrails and repeatable output logic.

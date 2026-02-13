@@ -1,0 +1,29 @@
+{
+  "groups": [
+    {
+      "name": "All Incident Fires",
+      "palette": ["#088590", "#EDB83D", "#C55502", "#D70026"],
+      "subcategories": ["Alert to attendance","Health Safety and wellbeing","Incident command","Major incident","Casualty Care","Environmental protection","Closure and handover","Commercial or residential building","Industrial or agricultural building","Tall building fire","Building under construction or demolition","Waste sites","Wildfires","Electrical installations","Road vehicle fires"]
+    },
+    {
+      "name": "Rescues",
+      "palette": ["#098A96", "#2A2927", "#D0C32F", "#FCCF0D"],
+      "subcategories": ["Water, ice and unstable ground","Flooding","Depth","Height","Trapped persons","Collapsed structures","Animals","Road traffic collision","Marauding terrorist attack"]
+    },
+    {
+      "name": "HAZMATS",
+      "palette": ["#098A96", "#2A2927", "#D0C32F", "#FCCF0D"],
+      "subcategories": ["Hazardous materials","Explosives and cylinders","Flammables and cryogenics","Health hazards","Environmental hazards"]
+    },
+    {
+      "name": "Transportation",
+      "palette": ["#273E65", "#1E1F26", "#E2241C", "#D0E1F9"],
+      "subcategories": ["Aircraft incidents","Railway incidents","Incidents onboard vessels"]
+    },
+    {
+      "name": "Breathing Apparatus",
+      "palette": ["#273E65", "#1E1F26", "#E2241C", "#D0E1F9"],
+      "subcategories": []
+    }
+  ]
+}

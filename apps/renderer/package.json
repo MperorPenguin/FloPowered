@@ -1,0 +1,13 @@
+{
+  "name":"nog-renderer",
+  "version":"1.0.0",
+  "private":true,
+  "scripts":{
+    "start":"node src/server.js",
+    "test":"node tests/smoke.test.js"
+  },
+  "dependencies":{
+    "express":"^4.19.2",
+    "pptxgenjs":"^3.12.0"
+  }
+}

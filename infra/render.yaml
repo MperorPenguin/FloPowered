@@ -1,0 +1,45 @@
+services:
+  - type: redis
+    name: nog-redis
+    ipAllowList: []
+
+  - type: web
+    name: nog-renderer
+    env: node
+    rootDir: apps/renderer
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+
+  - type: web
+    name: nog-api
+    env: python
+    rootDir: apps/api
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: nog-redis
+          property: connectionString
+      - key: RENDERER_URL
+        value: https://nog-renderer.onrender.com
+      - key: OPENAI_API_KEY
+        sync: false
+
+  - type: web
+    name: nog-web
+    env: node
+    rootDir: apps/web
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start -- --port $PORT
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        value: https://nog-api.onrender.com/api
+      - key: NODE_VERSION
+        value: 20

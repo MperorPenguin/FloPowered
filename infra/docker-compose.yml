@@ -1,0 +1,45 @@
+version: '3.9'
+services:
+  redis:
+    image: redis:7
+    ports: ['6379:6379']
+
+  renderer:
+    image: node:20
+    working_dir: /workspace/powerpointmaker/apps/renderer
+    volumes: ['../:/workspace/powerpointmaker']
+    command: bash -lc "npm install && npm start"
+    ports: ['7000:7000']
+
+  api:
+    image: python:3.11-slim
+    working_dir: /workspace/powerpointmaker/apps/api
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - RENDERER_URL=http://renderer:7000
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+    volumes: ['../:/workspace/powerpointmaker']
+    command: bash -lc "pip install -r requirements.txt && uvicorn app.main:app --host 0.0.0.0 --port 8000"
+    depends_on: [redis, renderer]
+    ports: ['8000:8000']
+
+  worker:
+    image: python:3.11-slim
+    working_dir: /workspace/powerpointmaker/apps/api
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - RENDERER_URL=http://renderer:7000
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+    volumes: ['../:/workspace/powerpointmaker']
+    command: bash -lc "pip install -r requirements.txt && celery -A app.tasks.celery_app:celery worker --loglevel=info"
+    depends_on: [redis, renderer]
+
+  web:
+    image: node:20
+    working_dir: /workspace/powerpointmaker/apps/web
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000/api
+    volumes: ['../:/workspace/powerpointmaker']
+    command: bash -lc "npm install && npm run dev -- --hostname 0.0.0.0 --port 3000"
+    depends_on: [api]
+    ports: ['3000:3000']

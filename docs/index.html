@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NOG Deck Studio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+<body class="min-h-screen bg-slate-100 text-slate-900">
+  <main class="max-w-6xl mx-auto p-4 md:p-6 space-y-4">
+    <section id="hero" class="rounded-3xl bg-gradient-to-br from-slate-900 via-slate-800 to-cyan-900 text-white p-6 shadow-xl">
+      <p class="text-xs uppercase tracking-[0.2em] text-cyan-300">NOG Deck Studio</p>
+      <h1 class="text-3xl md:text-4xl font-semibold mt-2">Simple deck converter & creator</h1>
+      <p class="text-slate-200 mt-2">Upload your old PowerPoint and generate a cleaner, creative version safely inside NOG colour rules.</p>
+      <div class="mt-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-sm">
+        <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+        <span id="statusText">Choose a connection option below</span>
+      </div>
+    </section>
+
+    <section id="quickConnect" class="bg-white rounded-2xl p-5 shadow space-y-3">
+      <h2 class="text-xl font-semibold">Quick Connect (one click)</h2>
+      <p class="text-sm text-slate-600">No need to type URLs each time. Pick one option and continue.</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+        <button onclick="setApiPreset('recommended')" class="px-4 py-3 rounded-xl bg-slate-900 text-white">Use recommended cloud API</button>
+        <button onclick="setApiPreset('local')" class="px-4 py-3 rounded-xl bg-cyan-700 text-white">Use local API (localhost)</button>
+        <button onclick="checkHealth()" class="px-4 py-3 rounded-xl bg-emerald-700 text-white">Check connection</button>
+      </div>
+      <details class="rounded-xl border border-slate-200 p-3">
+        <summary class="cursor-pointer font-medium">Advanced: custom API URL</summary>
+        <div class="mt-2 flex flex-col md:flex-row gap-2">
+          <input id="apiBase" class="flex-1 border rounded-lg px-3 py-2" placeholder="https://.../api" />
+          <button onclick="saveCustomApi()" class="px-4 py-2 rounded-lg bg-slate-800 text-white">Save custom URL</button>
+        </div>
+      </details>
+      <p id="health" class="text-sm text-slate-700"></p>
+    </section>
+
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div id="creative" class="bg-white rounded-2xl p-5 shadow space-y-3">
+        <div>
+          <h2 class="text-2xl font-semibold">1) Create new creative deck</h2>
+          <p class="text-sm text-slate-600">Recommended flow: upload old PPTX as reference and click Generate.</p>
+        </div>
+        <label class="text-sm font-medium">Category Group</label>
+        <select id="category" class="w-full border rounded-lg px-3 py-2"></select>
+        <label class="text-sm font-medium">Creativity</label>
+        <select id="creativity" class="w-full border rounded-lg px-3 py-2"><option>Low</option><option selected>Med</option><option>High</option></select>
+        <label class="text-sm font-medium">Reference old PPTX</label>
+        <input id="creativeOld" type="file" accept=".pptx" class="block w-full text-sm" />
+        <details class="rounded-xl border border-slate-200 p-3">
+          <summary class="cursor-pointer text-sm font-medium">Optional: use outline text instead of a PPTX</summary>
+          <textarea id="outline" rows="5" placeholder="Paste outline text here" class="w-full border rounded-lg px-3 py-2 mt-2"></textarea>
+        </details>
+        <button onclick="convertCreative()" class="w-full px-4 py-3 rounded-xl bg-emerald-700 text-white font-medium">Generate Creative Deck</button>
+      </div>
+
+      <div id="template" class="bg-white rounded-2xl p-5 shadow space-y-3">
+        <div>
+          <h2 class="text-2xl font-semibold">2) Template-Locked conversion</h2>
+          <p class="text-sm text-slate-600">Use this when you must preserve an existing template style.</p>
+        </div>
+        <label class="text-sm font-medium">Old PPTX</label>
+        <input id="oldPptx" type="file" accept=".pptx" class="block w-full text-sm" />
+        <label class="text-sm font-medium">Template PPTX</label>
+        <input id="tplPptx" type="file" accept=".pptx" class="block w-full text-sm" />
+        <button onclick="convertTemplateLocked()" class="w-full px-4 py-3 rounded-xl bg-cyan-700 text-white font-medium">Convert Using Template</button>
+      </div>
+    </section>
+
+    <section id="jobsCard" class="bg-white rounded-2xl p-5 shadow">
+      <div class="flex items-center justify-between gap-2">
+        <h2 class="text-2xl font-semibold">Jobs</h2>
+        <button onclick="refreshJobs()" class="px-4 py-2 rounded-lg bg-slate-800 text-white">Refresh</button>
+      </div>
+      <div id="jobs" class="space-y-2 mt-3"></div>
+    </section>
+
+    <details id="logCard" class="bg-white rounded-2xl p-5 shadow">
+      <summary class="cursor-pointer font-semibold">Technical log</summary>
+      <pre id="log" class="bg-slate-950 text-slate-100 text-xs p-3 rounded-lg mt-3 overflow-auto"></pre>
+    </details>
+  </main>
+
+<script>
+const $ = (id) => document.getElementById(id)
+const DEFAULT_API = 'https://nog-api.onrender.com/api'
+const LOCAL_API = 'http://localhost:8000/api'
+
+function getApi(){ return (localStorage.getItem('nog_api_base') || '').replace(/\/$/, '') }
+function setApi(url){
+  localStorage.setItem('nog_api_base', url.replace(/\/$/, ''))
+  $('apiBase').value = getApi()
+  $('statusText').textContent = `Connected target: ${getApi()}`
+}
+
+function log(msg){ $('log').textContent = `${new Date().toISOString()} ${msg}\n` + $('log').textContent }
+function ensureApi(){
+  if(getApi()) return true
+  $('statusText').textContent = 'Please click a Quick Connect button first.'
+  log('No API configured')
+  return false
+}
+
+function setApiPreset(type){
+  setApi(type === 'local' ? LOCAL_API : DEFAULT_API)
+  loadCategories()
+  refreshJobs()
+}
+
+function saveCustomApi(){
+  const custom = $('apiBase').value.trim()
+  if(!custom) return
+  setApi(custom)
+  loadCategories()
+  refreshJobs()
+}
+
+async function checkHealth(){
+  if(!ensureApi()) return
+  try {
+    const r = await fetch(`${getApi()}/health`)
+    const d = await r.json()
+    $('health').textContent = `✅ API healthy: ${JSON.stringify(d)}`
+  } catch (e) {
+    $('health').textContent = `❌ Health check failed: ${e.message}`
+  }
+}
+
+async function loadCategories(){
+  if(!ensureApi()) return
+  try {
+    const r = await fetch(`${getApi()}/categories`)
+    const d = await r.json()
+    $('category').innerHTML = (d.groups || []).map(g => `<option>${g.name}</option>`).join('')
+  } catch (e) { log('Categories load failed: ' + e.message) }
+}
+
+async function convertTemplateLocked(){
+  if(!ensureApi()) return
+  if(!$('oldPptx').files[0] || !$('tplPptx').files[0]) return log('Pick both old + template PPTX files first')
+  try {
+    const fd = new FormData()
+    fd.append('old_pptx', $('oldPptx').files[0])
+    fd.append('template_pptx', $('tplPptx').files[0])
+    const r = await fetch(`${getApi()}/convert/template-locked`, { method: 'POST', body: fd })
+    const d = await r.json()
+    log('Template-Locked job created: ' + JSON.stringify(d))
+    refreshJobs()
+  } catch (e) { log('Template-Locked failed: ' + e.message) }
+}
+
+async function convertCreative(){
+  if(!ensureApi()) return
+  const hasPptx = Boolean($('creativeOld').files[0])
+  const outline = $('outline').value.trim()
+  if(!hasPptx && !outline) return log('Upload old PPTX or enter outline text')
+  try {
+    const fd = new FormData()
+    fd.append('category_group', $('category').value)
+    fd.append('creativity', $('creativity').value)
+    if(hasPptx) fd.append('old_pptx', $('creativeOld').files[0])
+    else fd.append('outline_text', outline)
+    const r = await fetch(`${getApi()}/convert/creative`, { method: 'POST', body: fd })
+    const d = await r.json()
+    log('Creative job created: ' + JSON.stringify(d))
+    refreshJobs()
+  } catch (e) { log('Creative generate failed: ' + e.message) }
+}
+
+async function refreshJobs(){
+  if(!ensureApi()) return
+  try {
+    const r = await fetch(`${getApi()}/jobs`)
+    const jobs = await r.json()
+    $('jobs').innerHTML = jobs.map(j => `<div class='p-3 border border-slate-200 rounded-xl flex items-center justify-between gap-2'>
+      <div>
+        <div class='font-medium'>${j.job_id}</div>
+        <div class='text-sm text-slate-600'>${j.status} (${j.progress || 0}%)</div>
+      </div>
+      <div class='flex items-center gap-3 text-sm'>
+        <a class='text-blue-700 underline' href='${getApi()}/jobs/${j.job_id}/download' target='_blank'>Download</a>
+        <button class='text-slate-700' onclick="spec('${j.job_id}')">Spec</button>
+        <button class='text-red-700' onclick="delJob('${j.job_id}')">Delete</button>
+      </div>
+    </div>`).join('') || `<p class='text-sm text-slate-500'>No jobs yet.</p>`
+  } catch (e) { log('Jobs refresh failed: ' + e.message) }
+}
+
+async function delJob(id){
+  if(!ensureApi()) return
+  await fetch(`${getApi()}/jobs/${id}`, { method: 'DELETE' })
+  refreshJobs()
+}
+
+async function spec(id){
+  if(!ensureApi()) return
+  const r = await fetch(`${getApi()}/jobs/${id}/spec`)
+  log(await r.text())
+}
+
+(function init(){
+  const stored = getApi()
+  if(stored) {
+    $('apiBase').value = stored
+    $('statusText').textContent = `Connected target: ${stored}`
+    loadCategories()
+    refreshJobs()
+  }
+  gsap.fromTo(['#hero','#quickConnect','#creative','#template','#jobsCard','#logCard'],
+    { opacity: 0, y: 16 },
+    { opacity: 1, y: 0, duration: 0.45, stagger: 0.06, ease: 'power2.out' }
+  )
+})()
+</script>
+</body>
+</html>

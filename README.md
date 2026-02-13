@@ -40,3 +40,65 @@ cd apps/api && pip install -r requirements.txt && pytest -q
 cd apps/renderer && npm install && npm test
 cd apps/web && npm install && npm run build
 ```
+
+## Publish to GitHub + get a public weblink
+
+I cannot directly push to your GitHub account from this environment, but the repo is now structured for immediate publishing and deployment.
+
+### 1) Push this repo to GitHub
+
+```bash
+git remote add origin https://github.com/<your-org-or-user>/nog-deck-studio.git
+git push -u origin work
+```
+
+### 2) Deploy quickly on Render (Blueprint)
+
+A Render blueprint is included at `infra/render.yaml`.
+
+1. In Render, choose **New +** -> **Blueprint**.
+2. Select your GitHub repo/branch.
+3. Use `infra/render.yaml`.
+4. After initial provisioning, set these env vars in Render:
+   - `RENDERER_URL` on `nog-api` to your actual renderer URL (e.g. `https://nog-renderer.onrender.com`)
+   - `NEXT_PUBLIC_API_URL` on `nog-web` to your actual API URL + `/api` (e.g. `https://nog-api.onrender.com/api`)
+   - `OPENAI_API_KEY` (optional) on `nog-api` and worker if you want AI-assisted mode.
+5. Re-deploy services.
+
+### 3) Verify public endpoints
+
+- Web: `https://<your-web-service>.onrender.com`
+- API health: `https://<your-api-service>.onrender.com/api/health`
+- Renderer health: `https://<your-renderer-service>.onrender.com/health`
+
+### 4) Smoke test from your machine
+
+```bash
+curl https://<your-api-service>.onrender.com/api/health
+curl https://<your-renderer-service>.onrender.com/health
+```
+
+If both are healthy, open the web URL and run:
+- Template-Locked conversion flow
+- Creative NOG generation flow
+- Jobs download/delete flow
+
+
+## GitHub Pages UI (simple control panel)
+
+If you want a pure static UI on GitHub Pages, use `docs/index.html`.
+
+### Enable GitHub Pages
+1. Push this repo to GitHub.
+2. In repo settings -> Pages, set source to `main` (or `work`) branch, folder `/docs`.
+3. Open `https://<user>.github.io/<repo>/`.
+
+### Important
+GitHub Pages only hosts the UI. Jobs run on your deployed backend services.
+In the page, set **API Base URL** to your deployed API (example: `https://nog-api.onrender.com/api`).
+
+From that UI you can:
+- Run Template-Locked conversion
+- Run Creative NOG generation
+- Track/download/delete jobs
+- Inspect SlideSpec JSON

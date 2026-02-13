@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>NOG Deck Studio – GitHub Pages UI</title>
+  <style>
+    body{font-family:Arial,sans-serif;background:#f1f5f9;margin:0;padding:20px;color:#0f172a}
+    .card{background:#fff;border-radius:10px;padding:16px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+    input,select,textarea,button{padding:8px;margin:4px 0}
+    input,select,textarea{width:100%;box-sizing:border-box}
+    button{cursor:pointer}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    pre{background:#0f172a;color:#e2e8f0;padding:10px;border-radius:8px;overflow:auto}
+  </style>
+</head>
+<body>
+  <h1>NOG Deck Studio (GitHub Pages control UI)</h1>
+
+  <div class="card">
+    <h3>Connection</h3>
+    <label>API Base URL (example: https://nog-api.onrender.com/api)</label>
+    <input id="apiBase" placeholder="https://.../api"/>
+    <button onclick="saveApi()">Save API URL</button>
+    <button onclick="checkHealth()">Check API Health</button>
+    <div id="health"></div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Template-Locked Convert</h3>
+      <input id="oldPptx" type="file" accept=".pptx"/>
+      <input id="tplPptx" type="file" accept=".pptx"/>
+      <button onclick="convertTemplateLocked()">Convert</button>
+    </div>
+
+    <div class="card">
+      <h3>Creative NOG</h3>
+      <select id="category"></select>
+      <select id="creativity"><option>Low</option><option selected>Med</option><option>High</option></select>
+      <select id="inputType" onchange="toggleInput()"><option value="outline">Outline Text</option><option value="pptx">Old PPTX</option></select>
+      <textarea id="outline" rows="6" placeholder="Outline text"></textarea>
+      <input id="creativeOld" type="file" accept=".pptx" style="display:none"/>
+      <button onclick="convertCreative()">Generate</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Jobs</h3>
+    <button onclick="refreshJobs()">Refresh Jobs</button>
+    <div id="jobs"></div>
+  </div>
+
+  <div class="card">
+    <h3>Log</h3>
+    <pre id="log"></pre>
+  </div>
+
+<script>
+const $ = (id)=>document.getElementById(id)
+function api(){ return (localStorage.getItem('nog_api_base')||'').replace(/\/$/,'') }
+function log(msg){ $('log').textContent = `${new Date().toISOString()} ${msg}\n` + $('log').textContent }
+
+function saveApi(){ localStorage.setItem('nog_api_base',$('apiBase').value.trim()); log('API URL saved') }
+function toggleInput(){ $('outline').style.display = $('inputType').value==='outline' ? 'block':'none'; $('creativeOld').style.display = $('inputType').value==='pptx' ? 'block':'none' }
+
+async function checkHealth(){
+  try{
+    const r = await fetch(`${api()}/health`)
+    const d = await r.json(); $('health').textContent = `API health: ${JSON.stringify(d)}`
+  }catch(e){ $('health').textContent = `Health failed: ${e.message}` }
+}
+
+async function loadCategories(){
+  try{
+    const r = await fetch(`${api()}/categories`); const d = await r.json();
+    $('category').innerHTML = (d.groups||[]).map(g=>`<option>${g.name}</option>`).join('')
+  }catch(e){log('Categories load failed: '+e.message)}
+}
+
+async function convertTemplateLocked(){
+  const fd = new FormData();
+  fd.append('old_pptx',$('oldPptx').files[0]);
+  fd.append('template_pptx',$('tplPptx').files[0]);
+  const r = await fetch(`${api()}/convert/template-locked`,{method:'POST',body:fd});
+  const d = await r.json(); log('Template job: '+JSON.stringify(d)); refreshJobs();
+}
+
+async function convertCreative(){
+  const fd = new FormData();
+  fd.append('category_group',$('category').value)
+  fd.append('creativity',$('creativity').value)
+  if($('inputType').value==='outline') fd.append('outline_text',$('outline').value)
+  else if($('creativeOld').files[0]) fd.append('old_pptx',$('creativeOld').files[0])
+  const r = await fetch(`${api()}/convert/creative`,{method:'POST',body:fd});
+  const d = await r.json(); log('Creative job: '+JSON.stringify(d)); refreshJobs();
+}
+
+async function refreshJobs(){
+  const r = await fetch(`${api()}/jobs`); const jobs = await r.json();
+  $('jobs').innerHTML = jobs.map(j=>`<div style='padding:8px;border:1px solid #cbd5e1;border-radius:6px;margin:6px 0'>
+      <b>${j.job_id}</b> — ${j.status} (${j.progress||0}%)<br/>
+      <a href='${api()}/jobs/${j.job_id}/download' target='_blank'>Download PPTX</a>
+      <button onclick="delJob('${j.job_id}')">Delete</button>
+      <button onclick="spec('${j.job_id}')">Spec</button>
+    </div>`).join('')
+}
+
+async function delJob(id){ await fetch(`${api()}/jobs/${id}`,{method:'DELETE'}); refreshJobs(); }
+async function spec(id){ const r=await fetch(`${api()}/jobs/${id}/spec`); log(await r.text()) }
+
+(function init(){ $('apiBase').value = localStorage.getItem('nog_api_base') || ''; toggleInput(); if(api()) {loadCategories(); refreshJobs();} })();
+</script>
+</body>
+</html>

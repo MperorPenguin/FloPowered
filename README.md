@@ -1,40 +1,48 @@
-# NOG Deck Studio
+# FloPowered
 
 Production-grade monorepo for deterministic PowerPoint generation and conversion.
 
 ## Architecture
-- `apps/web`: Next.js UI (Convert, Creative NOG, Jobs)
+
+- `apps/web`: Next.js UI (Convert, Creative Flow, Jobs)
 - `apps/api`: FastAPI + Celery orchestration, deck extraction, AI optional pipeline, validation
 - `apps/renderer`: Node + PptxGenJS deterministic PPT renderer
 - `infra/docker-compose.yml`: web + api + worker + renderer + redis
 
 ## Modes
+
 1. **Template-Locked**: old.pptx + template.pptx, overwrite template placeholders to preserve template-bound behavior.
-2. **Creative NOG**: old.pptx or outline text -> DeckModel -> classify -> SlideSpec -> validate/fix -> render.
+2. **Creative Flow**: old.pptx or outline text -> DeckModel -> classify -> SlideSpec -> validate/fix -> render.
 
 ## Optional OpenAI
+
 - Without `OPENAI_API_KEY`: rules-only mode.
 - With `OPENAI_API_KEY`: Responses API called for classification + SlideSpec generation.
 - Prompt/response artifacts are logged in job `job.json` logs for audit.
 
 ## Run locally
+
 ```bash
 cd infra
 docker compose up --build
 ```
+
 Web: `http://localhost:3000`
 API: `http://localhost:8000/api/health`
 
 ## Env vars
+
 - `OPENAI_API_KEY` (optional)
 - `OPENAI_MODEL` (optional, defaults in API config)
 
 ## Troubleshooting
+
 - **LibreOffice missing**: thumbnails are skipped but PPT generation still works.
 - **Font availability**: renderer requests Aptos Black; if unavailable, PowerPoint system fallback is used.
 - **Redis down**: background jobs will queue fail; check `redis` container.
 
 ## Testing
+
 ```bash
 cd apps/api && pip install -r requirements.txt && pytest -q
 cd apps/renderer && npm install && npm test
@@ -48,7 +56,7 @@ I cannot directly push to your GitHub account from this environment, but the rep
 ### 1) Push this repo to GitHub
 
 ```bash
-git remote add origin https://github.com/<your-org-or-user>/nog-deck-studio.git
+git remote add origin https://github.com/<your-org-or-user>/flopowered.git
 git push -u origin work
 ```
 
@@ -60,9 +68,9 @@ A Render blueprint is included at `infra/render.yaml`.
 2. Select your GitHub repo/branch.
 3. Use `infra/render.yaml`.
 4. After initial provisioning, set these env vars in Render:
-   - `RENDERER_URL` on `nog-api` to your actual renderer URL (e.g. `https://nog-renderer.onrender.com`)
-   - `NEXT_PUBLIC_API_URL` on `nog-web` to your actual API URL + `/api` (e.g. `https://nog-api.onrender.com/api`)
-   - `OPENAI_API_KEY` (optional) on `nog-api` and worker if you want AI-assisted mode.
+   - `RENDERER_URL` on `flopowered-api` to your actual renderer URL (e.g. `https://flopowered-renderer.onrender.com`)
+   - `NEXT_PUBLIC_API_URL` on `flopowered-web` to your actual API URL + `/api` (e.g. `https://flopowered-api.onrender.com/api`)
+   - `OPENAI_API_KEY` (optional) on `flopowered-api` and worker if you want AI-assisted mode.
 5. Re-deploy services.
 
 ### 3) Verify public endpoints
@@ -79,64 +87,71 @@ curl https://<your-renderer-service>.onrender.com/health
 ```
 
 If both are healthy, open the web URL and run:
-- Template-Locked conversion flow
-- Creative NOG generation flow
-- Jobs download/delete flow
 
+- Template-Locked conversion flow
+- Creative Flow generation flow
+- Jobs download/delete flow
 
 ## GitHub Pages UI (simple control panel)
 
 If you want a pure static UI on GitHub Pages, use `docs/index.html`.
 
 ### Enable GitHub Pages
+
 1. Push this repo to GitHub.
 2. In repo settings -> Pages, set source to `main` (or `work`) branch, folder `/docs`.
 3. Open `https://<user>.github.io/<repo>/`.
 
 ### Important
+
 GitHub Pages only hosts the UI. Jobs run on your deployed backend services.
 In the page, use **Quick Connect** (recommended cloud/local) and only use custom API URL in Advanced if needed.
-In the page, set **API Base URL** to your deployed API (example: `https://nog-api.onrender.com/api`).
+In the page, set **API Base URL** to your deployed API (example: `https://flopowered-api.onrender.com/api`).
 
 From that UI you can:
+
 - Run Template-Locked conversion
-- Run Creative NOG generation
+- Run Creative Flow generation
 - Track/download/delete jobs
 - Inspect SlideSpec JSON
 
-
 ### If GitHub Pages still shows old UI
+
 - Confirm Pages source is branch `main` (or your active branch) + folder `/docs`.
 - Wait 1-3 minutes for Pages redeploy.
 - Hard refresh your browser (`Ctrl+Shift+R` / `Cmd+Shift+R`) to bypass cache.
 - Verify latest file is live by opening `https://<user>.github.io/<repo>/index.html`.
 
 ### If Actions shows: `pages/telemetry ... The operation was canceled`
+
 This is usually **not a code failure**. It means a newer Pages deployment run was queued, so GitHub canceled the older one.
 
 Do this:
+
 - Ensure there is only one latest commit you want deployed on the Pages source branch.
 - Open **Actions -> pages build and deployment** and confirm the latest run finishes `success`.
 - If runs keep canceling, stop rapid consecutive pushes for a minute, then push once and wait.
 - If needed, trigger a fresh run by making a tiny commit to `docs/index.html` and pushing.
 
 Quick verification command:
+
 ```bash
 curl -I https://<user>.github.io/<repo>/index.html
 ```
-Then compare page content in browser with the latest `docs/index.html` in GitHub.
 
+Then compare page content in browser with the latest `docs/index.html` in GitHub.
 
 ## Creative process and rule enforcement
 
-When you upload an old deck in Creative NOG mode, the system stores the file in the job folder and uses it as a **reference source** (not a strict visual copy).
+When you upload an old deck in Creative Flow mode, the system stores the file in the job folder and uses it as a **reference source** (not a strict visual copy).
 
 Pipeline used:
+
 1. Extract DeckModel (title, slide titles, bullets, raw text blocks).
 2. Classify slide intent (rules-first; OpenAI optional).
 3. Generate SlideSpec JSON (template type, motif, palette map, text blocks, animation sequence).
 4. Validate + auto-fix constraints:
-   - Only allowed NOG palette colours (+ near-white for readability)
+   - Only allowed FloPowered palette colours (+ near-white for readability)
    - Minimum text sizes (title >= 32pt, body >= 24pt)
    - Split overflow content into part 2 slide
 5. Deterministic renderer converts SlideSpec -> PPTX.

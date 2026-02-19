@@ -223,6 +223,28 @@
   let selectedAvatar = "🌱";
   let activeCourseId = courses[0].id;
   let activeSegmentIndex = 0;
+  const mobileTabs = document.querySelectorAll(".mobile-tab");
+  const desktopTabs = document.querySelectorAll(".desktop-tab");
+  const panels = document.querySelectorAll(".panel");
+  const lessons = document.querySelectorAll(".lesson");
+  const nameInput = document.getElementById("nameInput");
+  const createUserCard = document.getElementById("createUserCard");
+  const welcomeName = document.getElementById("welcomeName");
+  const profilePreview = document.getElementById("profilePreview");
+  const avatars = document.querySelectorAll(".avatar");
+  const progressText = document.getElementById("progressText");
+  const progressBar = document.getElementById("progressBar");
+  const dbStatus = document.getElementById("dbStatus");
+  const goUserButton = document.querySelector(".goUser");
+
+  const desktopQuery = window.matchMedia("(min-width: 1024px)");
+  let selectedAvatar = "🌱";
+  let db = null;
+
+  function setPanelAnimation(targetPanel) {
+    panels.forEach((panel) => panel.classList.remove("fade-in"));
+    if (targetPanel) targetPanel.classList.add("fade-in");
+  }
 
   function styleTabButton(button, active) {
     if (button.classList.contains("desktop-tab")) {
@@ -250,11 +272,28 @@
     panels.forEach((panel) =>
       panel.classList.toggle("hidden", panel.dataset.panel !== target),
     );
+
+    let activePanel = null;
+    panels.forEach((panel) => {
+      const isActive = panel.dataset.panel === target;
+      panel.classList.toggle("hidden", !isActive);
+      if (isActive) activePanel = panel;
+    });
+    setPanelAnimation(activePanel);
+  }
+
+  function refreshAvatarUI() {
+    avatars.forEach((button) => {
+      const active = button.dataset.avatar === selectedAvatar;
+      button.classList.toggle("border-moss", active);
+      button.classList.toggle("bg-mint", active);
+    });
   }
 
   function openDatabase() {
     return new Promise((resolve, reject) => {
       const request = indexedDB.open("floPoweredAcademyDB", 2);
+      const request = indexedDB.open("floPoweredAcademyDB", 1);
       request.onupgradeneeded = (event) => {
         const database = event.target.result;
         if (!database.objectStoreNames.contains("kv")) {
@@ -482,6 +521,61 @@
       setTab(active);
     });
   }
+  async function syncLessons() {
+    let done = 0;
+    for (const lesson of lessons) {
+      const checked = (await dbGet(lesson.dataset.lesson)) === "1";
+      lesson.checked = checked;
+      if (checked) done += 1;
+    }
+    progressText.textContent = `${done} / ${lessons.length} lessons done`;
+    progressBar.style.width = `${(done / lessons.length) * 100}%`;
+  }
+
+  [...mobileTabs, ...desktopTabs].forEach((tab) => {
+    tab.addEventListener("click", () => setTab(tab.dataset.tab));
+  });
+
+  if (goUserButton)
+    goUserButton.addEventListener("click", () => setTab("user"));
+
+  lessons.forEach((lesson) => {
+    lesson.addEventListener("change", async () => {
+      await dbSet(lesson.dataset.lesson, lesson.checked ? "1" : "0");
+      await syncLessons();
+    });
+  });
+
+  avatars.forEach((button) => {
+    button.addEventListener("click", async () => {
+      selectedAvatar = button.dataset.avatar;
+      await dbSet("vibeAvatar", selectedAvatar);
+      refreshAvatarUI();
+      await syncProfile();
+    });
+  });
+
+  if (createUserCard) {
+    createUserCard.addEventListener("click", async () => {
+      await dbSet("vibeName", (nameInput.value || "").trim() || "New learner");
+      await dbSet("vibeAvatar", selectedAvatar);
+      await syncProfile();
+    });
+  }
+
+  desktopQuery.addEventListener("change", () => {
+    const activeDesktop = [...desktopTabs].find((x) =>
+      x.classList.contains("bg-moss"),
+    );
+    const activeMobile = [...mobileTabs].find((x) =>
+      x.classList.contains("border-b-2"),
+    );
+    const active = (
+      activeDesktop ||
+      activeMobile || { dataset: { tab: "home" } }
+    ).dataset.tab;
+    setTab(active);
+  });
 
   async function bootstrap() {
     try {
@@ -502,6 +596,9 @@
     await renderPractice();
     await syncProgress();
     bindEvents();
+    setTab("home");
+    await syncProfile();
+    await syncLessons();
   }
 
   bootstrap();

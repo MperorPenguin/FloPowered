@@ -37,7 +37,7 @@ def job(job_id:str):
 def dl(job_id:str):
     p=dir_for(job_id)/'output.pptx'
     if not p.exists(): raise HTTPException(404,'not ready')
-    return FileResponse(p, filename=f'nog-deck-{job_id}.pptx')
+    return FileResponse(p, filename=f'flopowered-deck-{job_id}.pptx')
 
 @router.get('/jobs/{job_id}/spec')
 def get_spec(job_id:str):

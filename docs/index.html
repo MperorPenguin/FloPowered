@@ -21,12 +21,47 @@
       }
     </style>
     <script src="./app.js" defer></script>
+    <title>Flow Powered Vibe Coding Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              sage: "#dce8dd",
+            mint: "#edf6ee",
+              moss: "#2f5f45",
+              forest: "#1a3a2a",
+              ink: "#111111",
+            },
+            boxShadow: {
+              soft: "0 16px 44px rgba(17,17,17,0.08)",
+            },
+            fontFamily: {
+              sans: [
+                "Inter",
+                "ui-sans-serif",
+                "system-ui",
+                "Segoe UI",
+                "Roboto",
+                "Helvetica",
+                "Arial",
+                "sans-serif",
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   </head>
   <body class="bg-mint font-sans text-ink antialiased">
     <main class="mx-auto min-h-screen w-full max-w-6xl p-3 sm:p-6">
       <div
         class="overflow-hidden rounded-3xl border border-sage bg-white shadow-soft"
       >
+    <main class="mx-auto min-h-screen w-full max-w-5xl p-3 sm:p-6">
+      <div class="rounded-3xl border border-sage bg-white shadow-soft">
         <header
           class="flex items-center justify-between border-b border-sage px-4 py-3 sm:px-6"
         >
@@ -109,6 +144,8 @@
 
         <section class="space-y-4 p-4 sm:p-6">
           <div class="rounded-xl border border-sage bg-mint/60 p-3">
+        <section class="p-4 sm:p-6">
+          <div class="mb-4 rounded-xl border border-sage bg-mint/60 p-3">
             <p class="text-sm font-medium">Learning progress</p>
             <p id="progressText" class="mt-1 text-xs text-ink/70">
               0 / 16 lessons done
@@ -162,6 +199,10 @@
                   Final App
                 </button>
               </nav>
+              <p class="mt-4 text-xs text-ink/60">
+                Desktop mode uses a side navigation so content stays clean and
+                app-like.
+              </p>
             </aside>
 
             <section class="rounded-2xl border border-sage bg-white">
@@ -201,7 +242,7 @@
               </nav>
 
               <div class="p-4 sm:p-6">
-                <section class="panel fade-in" data-panel="home">
+                <section class="panel" data-panel="home">
                   <h3 class="text-2xl font-semibold">
                     Welcome to your guided app journey
                   </h3>
@@ -245,9 +286,7 @@
                   <div
                     class="mt-4 max-w-xl rounded-2xl border border-sage bg-mint/50 p-4"
                   >
-                    <label for="nameInput" class="block text-sm font-medium"
-                      >Your name</label
-                    >
+                    <label class="block text-sm font-medium">Your name</label>
                     <input
                       id="nameInput"
                       class="mt-1 w-full rounded-xl border border-sage bg-white px-3 py-2 text-sm outline-none focus:border-moss"
@@ -543,6 +582,961 @@
                       </ul>
                     </article>
                   </div>
+                  <div class="mt-4 grid gap-3 md:grid-cols-2">
+                    <pre
+                      class="overflow-x-auto rounded-xl bg-ink p-3 text-xs text-sage"
+                    >
+          </div>
+
+          <div class="grid gap-4 lg:grid-cols-[260px_1fr]">
+            <aside
+              class="hidden rounded-2xl border border-sage bg-mint/40 p-3 lg:block"
+            >
+              <p
+                class="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-moss"
+              >
+                Desktop navigation
+              </p>
+              <nav class="space-y-2">
+                <button
+                  class="desktop-tab w-full rounded-xl border px-3 py-2 text-left text-sm"
+                  data-tab="home"
+                >
+                  Home
+                </button>
+                <button
+                  class="desktop-tab w-full rounded-xl border px-3 py-2 text-left text-sm"
+                  data-tab="user"
+                >
+                  User Card
+                </button>
+                <button
+                  class="desktop-tab w-full rounded-xl border px-3 py-2 text-left text-sm"
+                  data-tab="courses"
+                >
+                  Courses
+                </button>
+                <button
+                  class="desktop-tab w-full rounded-xl border px-3 py-2 text-left text-sm"
+                  data-tab="toolkit"
+                >
+                  Toolkit
+                </button>
+                <button
+                  class="desktop-tab w-full rounded-xl border px-3 py-2 text-left text-sm"
+                  data-tab="final"
+                >
+                  Final App
+                </button>
+              </nav>
+              <p class="mt-4 text-xs text-ink/60">
+                Desktop mode uses a side navigation so content stays clean and
+                app-like.
+              </p>
+            </aside>
+
+            <section class="rounded-2xl border border-sage bg-white">
+              <nav
+                class="grid grid-cols-5 border-b border-sage text-[11px] sm:text-sm lg:hidden"
+              >
+                <button
+                  class="mobile-tab px-2 py-3 font-medium"
+                  data-tab="home"
+                >
+                  Home
+                </button>
+                <button
+                  class="mobile-tab px-2 py-3 font-medium"
+                  data-tab="user"
+                >
+                  User Card
+                </button>
+                <button
+                  class="mobile-tab px-2 py-3 font-medium"
+                  data-tab="courses"
+                >
+                  Courses
+                </button>
+                <button
+                  class="mobile-tab px-2 py-3 font-medium"
+                  data-tab="toolkit"
+                >
+                  Toolkit
+                </button>
+                <button
+                  class="mobile-tab px-2 py-3 font-medium"
+                  data-tab="final"
+                >
+                  Final App
+                </button>
+              </nav>
+
+              <div class="p-4 sm:p-6">
+                <section class="panel fade-in" data-panel="home">
+                <section class="panel" data-panel="home">
+                  <h3 class="text-2xl font-semibold">
+                    Welcome to your guided app journey
+                  </h3>
+                  <p class="mt-2 text-sm text-ink/75">
+                    Go one tab at a time. No rush. This academy starts from zero
+                    and teaches slowly.
+                  </p>
+                  <div class="mt-4 grid gap-3 md:grid-cols-2">
+                    <article
+                      class="rounded-xl border border-sage bg-mint/50 p-3"
+                    >
+                      <p class="font-medium">What you'll learn</p>
+                      <p class="mt-1 text-sm text-ink/75">
+                        How to use Llama, Claude, Gemini, and GPT with both
+                        friendly tools and backend methods.
+                      </p>
+                    </article>
+                    <article
+                      class="rounded-xl border border-sage bg-mint/50 p-3"
+                    >
+                      <p class="font-medium">How you'll learn</p>
+                      <p class="mt-1 text-sm text-ink/75">
+                        Tiny lessons, easy words, and clear tasks for phone and
+                        desktop.
+                      </p>
+                    </article>
+                  </div>
+                  <button
+                    class="goUser mt-4 rounded-xl bg-moss px-4 py-2 text-sm font-semibold text-white hover:bg-forest"
+                  >
+                    Create user card
+                  </button>
+                </section>
+
+                <section class="panel hidden" data-panel="user">
+                  <h3 class="text-2xl font-semibold">Create your user card</h3>
+                  <p class="mt-2 text-sm text-ink/75">
+                    This saves your name, avatar, and progress in a free local
+                    browser database (IndexedDB).
+                  </p>
+                  <div
+                    class="mt-4 max-w-xl rounded-2xl border border-sage bg-mint/50 p-4"
+                  >
+                    <label for="nameInput" class="block text-sm font-medium"
+                      >Your name</label
+                    >
+                    <label class="block text-sm font-medium">Your name</label>
+                    <input
+                      id="nameInput"
+                      class="mt-1 w-full rounded-xl border border-sage bg-white px-3 py-2 text-sm outline-none focus:border-moss"
+                      placeholder="Type your name"
+                    />
+                    <p class="mt-3 text-sm font-medium">Pick avatar</p>
+                    <div
+                      id="avatarGrid"
+                      class="mt-2 grid grid-cols-5 gap-2 text-lg"
+                    >
+                      <button
+                        class="avatar rounded-xl border border-sage bg-white p-2"
+                        data-avatar="🌱"
+                      >
+                        🌱
+                      </button>
+                      <button
+                        class="avatar rounded-xl border border-sage bg-white p-2"
+                        data-avatar="🚀"
+                      >
+                        🚀
+                      </button>
+                      <button
+                        class="avatar rounded-xl border border-sage bg-white p-2"
+                        data-avatar="🧠"
+                      >
+                        🧠
+                      </button>
+                      <button
+                        class="avatar rounded-xl border border-sage bg-white p-2"
+                        data-avatar="💡"
+                      >
+                        💡
+                      </button>
+                      <button
+                        class="avatar rounded-xl border border-sage bg-white p-2"
+                        data-avatar="🛠️"
+                      >
+                        🛠️
+                      </button>
+                    </div>
+                    <button
+                      id="createUserCard"
+                      class="mt-4 w-full rounded-xl bg-moss px-4 py-2 text-sm font-semibold text-white hover:bg-forest"
+                    >
+                      Create user card
+                    </button>
+                    <div
+                      class="mt-4 rounded-xl border border-moss/20 bg-white p-3"
+                    >
+                      <p class="text-xs text-ink/60">Profile preview</p>
+                      <p id="profilePreview" class="mt-1 text-sm font-medium">
+                        🌱 New learner
+                      </p>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="panel hidden" data-panel="courses">
+                  <h3 class="text-2xl font-semibold">Courses (small chunks)</h3>
+                  <p class="mt-2 text-sm text-ink/75">
+                    Each course has small lessons. Mark done as you go.
+                  </p>
+                  <div class="mt-4 grid gap-4 xl:grid-cols-2">
+                    <article class="rounded-xl border border-sage p-3">
+                      <p
+                        class="text-xs font-semibold uppercase tracking-[0.16em] text-moss"
+                      >
+                        Course 1 — gentle start
+                      </p>
+                      <ul class="mt-2 space-y-2 text-sm">
+                        <li>
+                          <label
+                            ><input
+                              class="lesson mr-2"
+                              data-lesson="c1l1"
+                              type="checkbox"
+                            />Lesson 1: What is vibe coding?</label
+                          >
+                        </li>
+                        <li>
+                          <label
+                            ><input
+                              class="lesson mr-2"
+                              data-lesson="c1l2"
+                              type="checkbox"
+                            />Lesson 2: Install one editor and one CLI.</label
+                          >
+                        </li>
+                        <li>
+                          <label
+                            ><input
+                              class="lesson mr-2"
+                              data-lesson="c1l3"
+                              type="checkbox"
+                            />Lesson 3: Ask your first safe prompt.</label
+                          >
+                        </li>
+                        <li>
+                          <label
+                            ><input
+                              class="lesson mr-2"
+                              data-lesson="c1l4"
+                              type="checkbox"
+                            />Lesson 4: Run your first tiny app.</label
+                          >
+                        </li>
+                      </ul>
+                    </article>
+                    <article class="rounded-xl border border-sage p-3">
+                      <p
+                        class="text-xs font-semibold uppercase tracking-[0.16em] text-moss"
+                      >
+                        Course 2 — guided building
+                      </p>
+                      <ul class="mt-2 space-y-2 text-sm">
+                        <li>
+                          <label
+                            ><input
+                              class="lesson mr-2"
+                              data-lesson="c2l1"
+                              type="checkbox"
+                            />Lesson 1: Make a clean prompt template.</label
+                          >
+                        </li>
+                        <li>
+                          <label
+                            ><input
+                              class="lesson mr-2"
+                              data-lesson="c2l2"
+                              type="checkbox"
+                            />Lesson 2: Ask model for file-by-file plan.</label
+                          >
+                        </li>
+                        <li>
+                          <label
+                            ><input
+                              class="lesson mr-2"
+                              data-lesson="c2l3"
+                              type="checkbox"
+                            />Lesson 3: Build one feature in tiny steps.</label
+                          >
+                        </li>
+                        <li>
+                          <label
+                            ><input
+                              class="lesson mr-2"
+                              data-lesson="c2l4"
+                              type="checkbox"
+                            />Lesson 4: Add simple tests and fix one bug.</label
+                          >
+                        </li>
+                      </ul>
+                    </article>
+                    <article class="rounded-xl border border-sage p-3">
+                      <p
+                        class="text-xs font-semibold uppercase tracking-[0.16em] text-moss"
+                      >
+                        Course 3 — backend confidence
+                      </p>
+                      <ul class="mt-2 space-y-2 text-sm">
+                        <li>
+                          <label
+                            ><input
+                              class="lesson mr-2"
+                              data-lesson="c3l1"
+                              type="checkbox"
+                            />Lesson 1: Use model APIs directly.</label
+                          >
+                        </li>
+                        <li>
+                          <label
+                            ><input
+                              class="lesson mr-2"
+                              data-lesson="c3l2"
+                              type="checkbox"
+                            />Lesson 2: Run via PowerShell and CMD.</label
+                          >
+                        </li>
+                        <li>
+                          <label
+                            ><input
+                              class="lesson mr-2"
+                              data-lesson="c3l3"
+                              type="checkbox"
+                            />Lesson 3: Save logs and read errors calmly.</label
+                          >
+                        </li>
+                        <li>
+                          <label
+                            ><input
+                              class="lesson mr-2"
+                              data-lesson="c3l4"
+                              type="checkbox"
+                            />Lesson 4: Improve with one refactor pass.</label
+                          >
+                        </li>
+                      </ul>
+                    </article>
+                    <article class="rounded-xl border border-sage p-3">
+                      <p
+                        class="text-xs font-semibold uppercase tracking-[0.16em] text-moss"
+                      >
+                        Course 4 — ship gently
+                      </p>
+                      <ul class="mt-2 space-y-2 text-sm">
+                        <li>
+                          <label
+                            ><input
+                              class="lesson mr-2"
+                              data-lesson="c4l1"
+                              type="checkbox"
+                            />Lesson 1: Build your launch checklist.</label
+                          >
+                        </li>
+                        <li>
+                          <label
+                            ><input
+                              class="lesson mr-2"
+                              data-lesson="c4l2"
+                              type="checkbox"
+                            />Lesson 2: Deploy the app.</label
+                          >
+                        </li>
+                        <li>
+                          <label
+                            ><input
+                              class="lesson mr-2"
+                              data-lesson="c4l3"
+                              type="checkbox"
+                            />Lesson 3: Test as if you are a user.</label
+                          >
+                        </li>
+                        <li>
+                          <label
+                            ><input
+                              class="lesson mr-2"
+                              data-lesson="c4l4"
+                              type="checkbox"
+                            />Lesson 4: Decide your next learning step.</label
+                          >
+                        </li>
+                      </ul>
+                    </article>
+                  </div>
+                </section>
+
+                <section class="panel hidden" data-panel="toolkit">
+                  <h3 class="text-2xl font-semibold">Toolkit (simple words)</h3>
+                  <p class="mt-2 text-sm text-ink/75">
+                    Use UI tools when you want comfort. Use backend tools when
+                    you want speed and control.
+                  </p>
+                  <div class="mt-4 grid gap-3 md:grid-cols-2">
+                    <article
+                      class="rounded-xl border border-sage bg-mint/40 p-3 text-sm"
+                    >
+                      <p class="font-medium">Models you can use</p>
+                      <ul class="mt-2 space-y-1 text-ink/80">
+                        <li>
+                          <strong>Llama:</strong> great open-source and local
+                          runs.
+                        </li>
+                        <li>
+                          <strong>Claude:</strong> great for long, clear coding
+                          help.
+                        </li>
+                        <li>
+                          <strong>Gemini:</strong> great when working with
+                          docs/images too.
+                        </li>
+                        <li>
+                          <strong>GPT:</strong> great all-round coding and
+                          debugging support.
+                        </li>
+                      </ul>
+                    </article>
+                    <article
+                      class="rounded-xl border border-sage bg-mint/40 p-3 text-sm"
+                    >
+                      <p class="font-medium">Tool choices</p>
+                      <ul class="mt-2 space-y-1 text-ink/80">
+                        <li>
+                          <strong>Anti-Gravity CLI:</strong> strong terminal
+                          workflow.
+                        </li>
+                        <li>
+                          <strong>Cursor:</strong> smooth editor guidance.
+                        </li>
+                        <li>
+                          <strong>VS Code:</strong> familiar and flexible.
+                        </li>
+                      </ul>
+                    </article>
+                  </div>
+                  <div class="mt-4 grid gap-3 md:grid-cols-2">
+                    <pre
+                      class="overflow-x-auto rounded-xl bg-ink p-3 text-xs text-sage"
+                    >
+          </div>
+
+          <section class="rounded-2xl border border-sage bg-white">
+            <nav
+              class="grid grid-cols-5 border-b border-sage text-[11px] sm:text-sm"
+          <div>
+            <p
+              class="text-xs font-semibold uppercase tracking-[0.18em] text-moss"
+            >
+              Flow Powered
+            </p>
+            <h1 class="text-lg font-semibold sm:text-xl">
+              Vibe Coding Academy
+            </h1>
+          </div>
+          <div class="text-right">
+            <p id="welcomeName" class="text-sm font-medium">Hi there 👋</p>
+            <p class="text-xs text-ink/60">Kind, simple, step-by-step</p>
+          </div>
+        </header>
+
+        <section class="grid gap-4 p-4 sm:p-6 lg:grid-cols-[1.3fr_2fr]">
+          <aside class="rounded-2xl border border-sage bg-mint/60 p-4">
+            <h2 class="text-base font-semibold">Your learner card</h2>
+            <p class="mt-1 text-sm text-ink/70">
+              Set your name and choose a mini avatar.
+            </p>
+
+            <label class="mt-4 block text-sm font-medium">Your name</label>
+            <input
+              id="nameInput"
+              class="mt-1 w-full rounded-xl border border-sage bg-white px-3 py-2 text-sm outline-none focus:border-moss"
+              placeholder="Type your name"
+            />
+
+            <p class="mt-3 text-sm font-medium">Pick avatar</p>
+            <div id="avatarGrid" class="mt-2 grid grid-cols-5 gap-2 text-lg">
+              <button
+                class="avatar rounded-xl border border-sage bg-white p-2"
+                data-avatar="🌱"
+              >
+                🌱
+              </button>
+              <button
+                class="avatar rounded-xl border border-sage bg-white p-2"
+                data-avatar="🚀"
+              >
+                🚀
+              </button>
+              <button
+                class="avatar rounded-xl border border-sage bg-white p-2"
+                data-avatar="🧠"
+              >
+                🧠
+              </button>
+              <button
+                class="avatar rounded-xl border border-sage bg-white p-2"
+                data-avatar="💡"
+              >
+                💡
+              </button>
+              <button
+                class="avatar rounded-xl border border-sage bg-white p-2"
+                data-avatar="🛠️"
+              >
+                🛠️
+              </button>
+            </div>
+
+            <button
+              id="saveProfile"
+              class="mt-4 w-full rounded-xl bg-moss px-4 py-2 text-sm font-semibold text-white hover:bg-forest"
+            >
+              Save learner card
+            </button>
+
+            <div class="mt-4 rounded-xl border border-moss/20 bg-white p-3">
+              <p class="text-xs text-ink/60">Profile preview</p>
+              <p id="profilePreview" class="mt-1 text-sm font-medium">
+                🌱 New learner
+              </p>
+            </div>
+
+            <div class="mt-4 rounded-xl border border-sage bg-white p-3">
+              <p class="text-sm font-medium">Progress</p>
+              <p id="progressText" class="mt-1 text-xs text-ink/70">
+                0 / 16 lessons done
+              </p>
+              <div class="mt-2 h-2 rounded-full bg-sage/60">
+                <div
+                  id="progressBar"
+                  class="h-2 w-0 rounded-full bg-moss"
+                ></div>
+              </div>
+            </div>
+          </aside>
+
+          <section class="rounded-2xl border border-sage bg-white">
+            <nav
+              class="grid grid-cols-4 border-b border-sage text-xs sm:text-sm"
+            >
+              <button
+                class="tab px-2 py-3 font-medium text-moss"
+                data-tab="home"
+              >
+                Home
+              </button>
+              <button
+                class="tab px-2 py-3 font-medium text-ink/70"
+                data-tab="user"
+              >
+                User Card
+              </button>
+              <button
+                class="tab px-2 py-3 font-medium text-ink/70"
+                data-tab="courses"
+              >
+                Courses
+              </button>
+              <button
+                class="tab px-2 py-3 font-medium text-ink/70"
+                data-tab="toolkit"
+              >
+                Toolkit
+              </button>
+              <button
+                class="tab px-2 py-3 font-medium text-ink/70"
+                data-tab="final"
+              >
+                Final App
+              </button>
+            </nav>
+
+            <div class="p-4 sm:p-6">
+              <section class="panel" data-panel="home">
+                <h3 class="text-xl font-semibold">
+                  Welcome to your guided app journey
+                </h3>
+                <p class="mt-2 text-sm text-ink/75">
+                  Go one tab at a time. No rush. This academy starts from zero
+                  and teaches slowly.
+                  This is not a long page. It works like an app. Go one tab at a
+                  time. No rush. You can do this.
+                </p>
+                <div class="mt-4 grid gap-3 sm:grid-cols-2">
+                  <article class="rounded-xl border border-sage bg-mint/50 p-3">
+                    <p class="font-medium">What you'll learn</p>
+                    <p class="mt-1 text-sm text-ink/75">
+                      How to use Llama, Claude, Gemini, and GPT with both
+                      friendly tools and backend methods.
+                      How to use Llama, Claude, Gemini, and GPT with friendly
+                      tools and direct backend methods.
+                    </p>
+                  </article>
+                  <article class="rounded-xl border border-sage bg-mint/50 p-3">
+                    <p class="font-medium">How you'll learn</p>
+                    <p class="mt-1 text-sm text-ink/75">
+                      Tiny lessons, easy words, and clear tasks for phone and
+                      desktop.
+                      Tiny lessons, kind wording, checkboxes, and practical
+                      tasks for phone or desktop.
+                    </p>
+                  </article>
+                </div>
+                <button
+                  class="goUser mt-4 rounded-xl bg-moss px-4 py-2 text-sm font-semibold text-white hover:bg-forest"
+                >
+                  Create user card
+                </button>
+              </section>
+
+              <section class="panel hidden" data-panel="user">
+                <h3 class="text-xl font-semibold">Create your user card</h3>
+                <p class="mt-2 text-sm text-ink/75">
+                  This saves your name, avatar, and progress in a free local
+                  browser database (IndexedDB).
+                </p>
+
+                <div class="mt-4 rounded-2xl border border-sage bg-mint/50 p-4">
+                  <label class="block text-sm font-medium">Your name</label>
+                  <input
+                    id="nameInput"
+                    class="mt-1 w-full rounded-xl border border-sage bg-white px-3 py-2 text-sm outline-none focus:border-moss"
+                    placeholder="Type your name"
+                  />
+
+                  <p class="mt-3 text-sm font-medium">Pick avatar</p>
+                  <div
+                    id="avatarGrid"
+                    class="mt-2 grid grid-cols-5 gap-2 text-lg"
+                  >
+                    <button
+                      class="avatar rounded-xl border border-sage bg-white p-2"
+                      data-avatar="🌱"
+                    >
+                      🌱
+                    </button>
+                    <button
+                      class="avatar rounded-xl border border-sage bg-white p-2"
+                      data-avatar="🚀"
+                    >
+                      🚀
+                    </button>
+                    <button
+                      class="avatar rounded-xl border border-sage bg-white p-2"
+                      data-avatar="🧠"
+                    >
+                      🧠
+                    </button>
+                    <button
+                      class="avatar rounded-xl border border-sage bg-white p-2"
+                      data-avatar="💡"
+                    >
+                      💡
+                    </button>
+                    <button
+                      class="avatar rounded-xl border border-sage bg-white p-2"
+                      data-avatar="🛠️"
+                    >
+                      🛠️
+                    </button>
+                  </div>
+
+                  <button
+                    id="createUserCard"
+                    class="mt-4 w-full rounded-xl bg-moss px-4 py-2 text-sm font-semibold text-white hover:bg-forest"
+                  >
+                    Create user card
+                  </button>
+
+                  <div
+                    class="mt-4 rounded-xl border border-moss/20 bg-white p-3"
+                  >
+                    <p class="text-xs text-ink/60">Profile preview</p>
+                    <p id="profilePreview" class="mt-1 text-sm font-medium">
+                      🌱 New learner
+                    </p>
+                  </div>
+                </div>
+              </section>
+
+                  class="goCourses mt-4 rounded-xl bg-moss px-4 py-2 text-sm font-semibold text-white hover:bg-forest"
+                >
+                  Start with Course 1
+                </button>
+              </section>
+
+              <section class="panel hidden" data-panel="courses">
+                <h3 class="text-xl font-semibold">Courses (small chunks)</h3>
+                <p class="mt-2 text-sm text-ink/75">
+                  Each course has small lessons. Mark done as you go.
+                </p>
+
+                <div class="mt-4 space-y-4">
+                  <article class="rounded-xl border border-sage p-3">
+                    <p
+                      class="text-xs font-semibold uppercase tracking-[0.16em] text-moss"
+                    >
+                      Course 1 — gentle start
+                    </p>
+                    <ul class="mt-2 space-y-2 text-sm">
+                      <li>
+                        <label
+                          ><input
+                            class="lesson mr-2"
+                            data-lesson="c1l1"
+                            type="checkbox"
+                          />Lesson 1: What is vibe coding?</label
+                        >
+                      </li>
+                      <li>
+                        <label
+                          ><input
+                            class="lesson mr-2"
+                            data-lesson="c1l2"
+                            type="checkbox"
+                          />Lesson 2: Install one editor and one CLI.</label
+                        >
+                      </li>
+                      <li>
+                        <label
+                          ><input
+                            class="lesson mr-2"
+                            data-lesson="c1l3"
+                            type="checkbox"
+                          />Lesson 3: Ask your first safe prompt.</label
+                        >
+                      </li>
+                      <li>
+                        <label
+                          ><input
+                            class="lesson mr-2"
+                            data-lesson="c1l4"
+                            type="checkbox"
+                          />Lesson 4: Run your first tiny app.</label
+                        >
+                      </li>
+                    </ul>
+                  </article>
+
+                  <article class="rounded-xl border border-sage p-3">
+                    <p
+                      class="text-xs font-semibold uppercase tracking-[0.16em] text-moss"
+                    >
+                      Course 2 — guided building
+                    </p>
+                    <ul class="mt-2 space-y-2 text-sm">
+                      <li>
+                        <label
+                          ><input
+                            class="lesson mr-2"
+                            data-lesson="c2l1"
+                            type="checkbox"
+                          />Lesson 1: Make a clean prompt template.</label
+                        >
+                      </li>
+                      <li>
+                        <label
+                          ><input
+                            class="lesson mr-2"
+                            data-lesson="c2l2"
+                            type="checkbox"
+                          />Lesson 2: Ask model for file-by-file plan.</label
+                        >
+                      </li>
+                      <li>
+                        <label
+                          ><input
+                            class="lesson mr-2"
+                            data-lesson="c2l3"
+                            type="checkbox"
+                          />Lesson 3: Build one feature in tiny steps.</label
+                        >
+                      </li>
+                      <li>
+                        <label
+                          ><input
+                            class="lesson mr-2"
+                            data-lesson="c2l4"
+                            type="checkbox"
+                          />Lesson 4: Add simple tests and fix one bug.</label
+                        >
+                      </li>
+                    </ul>
+                  </article>
+
+                  <article class="rounded-xl border border-sage p-3">
+                    <p
+                      class="text-xs font-semibold uppercase tracking-[0.16em] text-moss"
+                    >
+                      Course 3 — backend confidence
+                    </p>
+                    <ul class="mt-2 space-y-2 text-sm">
+                      <li>
+                        <label
+                          ><input
+                            class="lesson mr-2"
+                            data-lesson="c3l1"
+                            type="checkbox"
+                          />Lesson 1: Use model APIs directly.</label
+                        >
+                      </li>
+                      <li>
+                        <label
+                          ><input
+                            class="lesson mr-2"
+                            data-lesson="c3l2"
+                            type="checkbox"
+                          />Lesson 2: Run via PowerShell and CMD.</label
+                        >
+                      </li>
+                      <li>
+                        <label
+                          ><input
+                            class="lesson mr-2"
+                            data-lesson="c3l3"
+                            type="checkbox"
+                          />Lesson 3: Save logs and read errors calmly.</label
+                        >
+                      </li>
+                      <li>
+                        <label
+                          ><input
+                            class="lesson mr-2"
+                            data-lesson="c3l4"
+                            type="checkbox"
+                          />Lesson 4: Improve with one refactor pass.</label
+                        >
+                      </li>
+                    </ul>
+                  </article>
+
+                  <article class="rounded-xl border border-sage p-3">
+                    <p
+                      class="text-xs font-semibold uppercase tracking-[0.16em] text-moss"
+                    >
+                      Course 4 — ship gently
+                    </p>
+                    <ul class="mt-2 space-y-2 text-sm">
+                      <li>
+                        <label
+                          ><input
+                            class="lesson mr-2"
+                            data-lesson="c4l1"
+                            type="checkbox"
+                          />Lesson 1: Build your launch checklist.</label
+                        >
+                      </li>
+                      <li>
+                        <label
+                          ><input
+                            class="lesson mr-2"
+                            data-lesson="c4l2"
+                            type="checkbox"
+                          />Lesson 2: Deploy the app.</label
+                        >
+                      </li>
+                      <li>
+                        <label
+                          ><input
+                            class="lesson mr-2"
+                            data-lesson="c4l3"
+                            type="checkbox"
+                          />Lesson 3: Test as if you are a user.</label
+                        >
+                      </li>
+                      <li>
+                        <label
+                          ><input
+                            class="lesson mr-2"
+                            data-lesson="c4l4"
+                            type="checkbox"
+                          />Lesson 4: Decide your next learning step.</label
+                        >
+                      </li>
+                    </ul>
+                  </article>
+                </div>
+              </section>
+
+              <section class="panel hidden" data-panel="toolkit">
+                <h3 class="text-xl font-semibold">Toolkit (simple words)</h3>
+                <p class="mt-2 text-sm text-ink/75">
+                  Use UI tools when you want comfort. Use backend tools when you
+                  Use pretty tools when you want. Use backend tools when you
+                  want speed and control.
+                </p>
+                <div class="mt-4 grid gap-3 md:grid-cols-2">
+                  <article
+                    class="rounded-xl border border-sage bg-mint/40 p-3 text-sm"
+                  >
+                    <p class="font-medium">Models you can use</p>
+                    <ul class="mt-2 space-y-1 text-ink/80">
+                      <li>
+                        <strong>Llama:</strong> great open-source and local
+                        runs.
+                      </li>
+                      <li>
+                        <strong>Claude:</strong> great for long, clear coding
+                        help.
+                      </li>
+                      <li>
+                        <strong>Gemini:</strong> great when working with
+                        docs/images too.
+                      </li>
+                      <li>
+                        <strong>GPT:</strong> great all-round coding and
+                        debugging support.
+                      </li>
+                    </ul>
+                  </article>
+                  <article
+                    class="rounded-xl border border-sage bg-mint/40 p-3 text-sm"
+                  >
+                    <p class="font-medium">Tool choices</p>
+                    <ul class="mt-2 space-y-1 text-ink/80">
+                      <li>
+                        <strong>Anti-Gravity CLI:</strong> strong terminal
+                        workflow.
+                      </li>
+                      <li><strong>Cursor:</strong> smooth editor guidance.</li>
+                      <li><strong>VS Code:</strong> familiar and flexible.</li>
+                    </ul>
+                  </article>
+                </div>
+                      <li>
+                        <strong>Cursor:</strong> very smooth editor guidance.
+                      </li>
+                      <li>
+                        <strong>VS Code:</strong> familiar, stable, flexible.
+                      </li>
+                    </ul>
+                  </article>
+                </div>
+
+                <div class="mt-4 grid gap-3 md:grid-cols-2">
+                  <pre
+                    class="overflow-x-auto rounded-xl bg-ink p-3 text-xs text-sage"
+                  >
+# PowerShell example
+$env:MODEL_PROVIDER="claude"
+$env:MODEL_API_KEY="your_key"
+python app.py</pre
+                    >
+                    <pre
+                      class="overflow-x-auto rounded-xl bg-ink p-3 text-xs text-sage"
+                    >
+                  >
+                  <pre
+                    class="overflow-x-auto rounded-xl bg-ink p-3 text-xs text-sage"
+                  >
+:: CMD example
+set MODEL_PROVIDER=llama
+set MODEL_API_KEY=your_key
+python app.py</pre
+                    >
+                  </div>
                 </section>
 
                 <section class="panel hidden" data-panel="final">
@@ -586,5 +1580,532 @@
         </section>
       </div>
     </main>
+                  >
+                </div>
+              </section>
+
+              <section class="panel hidden" data-panel="final">
+                <h3 class="text-xl font-semibold">
+                  Final challenge app (harder, still friendly)
+                </h3>
+                <p class="mt-2 text-sm text-ink/75">
+                  Build <strong>FlowBuddy Planner</strong>: a multi-user planner
+                  with goals, notes, reminders, and progress insights.
+                </p>
+
+                <ol class="mt-4 space-y-2 text-sm">
+                  <li class="rounded-lg border border-sage bg-mint/40 p-3">
+                    <strong>Step 1:</strong> Plan pages: login, dashboard,
+                    goals, reminders.
+                  </li>
+                  <li class="rounded-lg border border-sage bg-mint/40 p-3">
+                    <strong>Step 2:</strong> Build data model: users, projects,
+                    tasks, check-ins.
+                  </li>
+                  <li class="rounded-lg border border-sage bg-mint/40 p-3">
+                    <strong>Step 3:</strong> Add backend APIs with safe input
+                    checks.
+                  </li>
+                  <li class="rounded-lg border border-sage bg-mint/40 p-3">
+                    <strong>Step 4:</strong> Connect frontend forms and status
+                    cards.
+                  </li>
+                  <li class="rounded-lg border border-sage bg-mint/40 p-3">
+                    <strong>Step 5:</strong> Add tests and simple error
+                    messages.
+                  </li>
+                  <li class="rounded-lg border border-sage bg-mint/40 p-3">
+                    <strong>Step 6:</strong> Deploy, review, improve, and decide
+                    if this path feels right for you.
+                  </li>
+                </ol>
+
+                <div
+                  class="mt-4 rounded-xl border border-moss/20 bg-moss p-4 text-white"
+                >
+                  <p class="text-sm">
+                    Gentle reminder: you don’t need to know everything now. One
+                    small step each day is enough.
+                  </p>
+                </div>
+              </section>
+            </div>
+          </section>
+        </section>
+      </div>
+    </main>
+
+    <script>
+      (() => {
+        if (window.__floPoweredVibeInit) return;
+        window.__floPoweredVibeInit = true;
+
+        const mobileTabs = document.querySelectorAll(".mobile-tab");
+        const desktopTabs = document.querySelectorAll(".desktop-tab");
+        const panels = document.querySelectorAll(".panel");
+        const lessons = document.querySelectorAll(".lesson");
+        const nameInput = document.getElementById("nameInput");
+        const createUserCard = document.getElementById("createUserCard");
+        const welcomeName = document.getElementById("welcomeName");
+        const profilePreview = document.getElementById("profilePreview");
+        const avatars = document.querySelectorAll(".avatar");
+        const progressText = document.getElementById("progressText");
+        const progressBar = document.getElementById("progressBar");
+        const dbStatus = document.getElementById("dbStatus");
+
+        const desktopQuery = window.matchMedia("(min-width: 1024px)");
+        let selectedAvatar = "🌱";
+        let db = null;
+
+        function isDesktopMode() {
+          return desktopQuery.matches;
+        }
+
+        function openDatabase() {
+          return new Promise((resolve, reject) => {
+            const request = indexedDB.open("floPoweredAcademyDB", 1);
+            request.onupgradeneeded = (event) => {
+              const database = event.target.result;
+              if (!database.objectStoreNames.contains("kv")) {
+                database.createObjectStore("kv", { keyPath: "key" });
+              }
+            };
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => reject(request.error);
+          });
+        }
+
+        function dbSet(key, value) {
+          if (!db) {
+            localStorage.setItem(key, value);
+            return Promise.resolve();
+          }
+          return new Promise((resolve, reject) => {
+            const tx = db.transaction("kv", "readwrite");
+            tx.objectStore("kv").put({ key, value });
+            tx.oncomplete = () => resolve();
+            tx.onerror = () => reject(tx.error);
+          });
+        }
+
+        function dbGet(key) {
+          if (!db) return Promise.resolve(localStorage.getItem(key));
+          return new Promise((resolve, reject) => {
+            const tx = db.transaction("kv", "readonly");
+            const req = tx.objectStore("kv").get(key);
+            req.onsuccess = () => resolve(req.result ? req.result.value : null);
+            req.onerror = () => reject(req.error);
+          });
+        }
+
+        function styleTabButton(button, active) {
+          if (button.classList.contains("desktop-tab")) {
+            button.classList.toggle("bg-moss", active);
+            button.classList.toggle("text-white", active);
+            button.classList.toggle("border-moss", active);
+            button.classList.toggle("bg-white", !active);
+            button.classList.toggle("text-ink", !active);
+            button.classList.toggle("border-sage", !active);
+          } else {
+            button.classList.toggle("text-moss", active);
+            button.classList.toggle("border-b-2", active);
+            button.classList.toggle("border-moss", active);
+            button.classList.toggle("text-ink/70", !active);
+          }
+        }
+
+        function setTab(target) {
+          mobileTabs.forEach((tab) =>
+            styleTabButton(tab, tab.dataset.tab === target),
+          );
+          desktopTabs.forEach((tab) =>
+            styleTabButton(tab, tab.dataset.tab === target),
+          );
+          panels.forEach((panel) =>
+            panel.classList.toggle("hidden", panel.dataset.panel !== target),
+          );
+        }
+
+        function refreshAvatarUI() {
+          avatars.forEach((button) => {
+            const active = button.dataset.avatar === selectedAvatar;
+            button.classList.toggle("border-moss", active);
+            button.classList.toggle("bg-mint", active);
+          });
+        }
+
+        async function syncProfile() {
+          const name = (await dbGet("vibeName")) || "New learner";
+          selectedAvatar = (await dbGet("vibeAvatar")) || "🌱";
+          welcomeName.textContent = `Hi ${name} ${selectedAvatar}`;
+          profilePreview.textContent = `${selectedAvatar} ${name}`;
+          nameInput.value = name === "New learner" ? "" : name;
+          refreshAvatarUI();
+        }
+
+        async function syncLessons() {
+          let done = 0;
+          for (const lesson of lessons) {
+            const checked = (await dbGet(lesson.dataset.lesson)) === "1";
+            lesson.checked = checked;
+            if (checked) done += 1;
+          }
+          progressText.textContent = `${done} / ${lessons.length} lessons done`;
+          progressBar.style.width = `${(done / lessons.length) * 100}%`;
+        }
+
+        [...mobileTabs, ...desktopTabs].forEach((tab) => {
+          tab.addEventListener("click", () => setTab(tab.dataset.tab));
+        });
+
+        document
+          .querySelector(".goUser")
+          .addEventListener("click", () => setTab("user"));
+
+        lessons.forEach((lesson) => {
+          lesson.addEventListener("change", async () => {
+            await dbSet(lesson.dataset.lesson, lesson.checked ? "1" : "0");
+            syncLessons();
+          });
+        });
+
+        avatars.forEach((button) => {
+          button.addEventListener("click", async () => {
+            selectedAvatar = button.dataset.avatar;
+            await dbSet("vibeAvatar", selectedAvatar);
+            refreshAvatarUI();
+            syncProfile();
+          });
+        });
+
+        createUserCard.addEventListener("click", async () => {
+          await dbSet(
+            "vibeName",
+            (nameInput.value || "").trim() || "New learner",
+          );
+          await dbSet("vibeAvatar", selectedAvatar);
+          syncProfile();
+        });
+
+        function runEntranceAnimation() {
+          if (isDesktopMode()) {
+            gsap.from("aside, .panel:not(.hidden)", {
+              duration: 0.55,
+              x: 8,
+              opacity: 0,
+              ease: "power2.out",
+            });
+          } else {
+            gsap.from(".panel:not(.hidden)", {
+              duration: 0.55,
+              y: 10,
+              opacity: 0,
+              ease: "power2.out",
+            });
+          }
+        }
+
+        async function bootstrap() {
+          try {
+            db = await openDatabase();
+            dbStatus.textContent =
+              "Storage: IndexedDB connected (free local database)";
+          } catch {
+            dbStatus.textContent = "Storage: fallback to localStorage";
+          }
+
+          setTab("home");
+          await syncProfile();
+          await syncLessons();
+          runEntranceAnimation();
+        }
+
+        desktopQuery.addEventListener("change", () => runEntranceAnimation());
+        bootstrap();
+      })();
+      const mobileTabs = document.querySelectorAll(".mobile-tab");
+      const desktopTabs = document.querySelectorAll(".desktop-tab");
+      const tabs = document.querySelectorAll(".tab");
+      const panels = document.querySelectorAll(".panel");
+      const lessons = document.querySelectorAll(".lesson");
+      const nameInput = document.getElementById("nameInput");
+      const createUserCard = document.getElementById("createUserCard");
+      const saveProfile = document.getElementById("saveProfile");
+      const welcomeName = document.getElementById("welcomeName");
+      const profilePreview = document.getElementById("profilePreview");
+      const avatars = document.querySelectorAll(".avatar");
+      const progressText = document.getElementById("progressText");
+      const progressBar = document.getElementById("progressBar");
+      const dbStatus = document.getElementById("dbStatus");
+
+      const desktopQuery = window.matchMedia("(min-width: 1024px)");
+      let selectedAvatar = "🌱";
+      let db = null;
+
+      function isDesktopMode() {
+        return desktopQuery.matches;
+      }
+
+      let selectedAvatar = "🌱";
+      let db = null;
+
+      function openDatabase() {
+        return new Promise((resolve, reject) => {
+          const request = indexedDB.open("floPoweredAcademyDB", 1);
+          request.onupgradeneeded = (event) => {
+            const database = event.target.result;
+            if (!database.objectStoreNames.contains("kv")) {
+              database.createObjectStore("kv", { keyPath: "key" });
+            }
+          };
+          request.onsuccess = () => resolve(request.result);
+          request.onerror = () => reject(request.error);
+        });
+      }
+
+      function dbSet(key, value) {
+        if (!db) {
+          localStorage.setItem(key, value);
+          return Promise.resolve();
+        }
+        return new Promise((resolve, reject) => {
+          const tx = db.transaction("kv", "readwrite");
+          tx.objectStore("kv").put({ key, value });
+          tx.oncomplete = () => resolve();
+          tx.onerror = () => reject(tx.error);
+        });
+      }
+
+      function dbGet(key) {
+        if (!db) return Promise.resolve(localStorage.getItem(key));
+        if (!db) {
+          return Promise.resolve(localStorage.getItem(key));
+        }
+        return new Promise((resolve, reject) => {
+          const tx = db.transaction("kv", "readonly");
+          const req = tx.objectStore("kv").get(key);
+          req.onsuccess = () => resolve(req.result ? req.result.value : null);
+          req.onerror = () => reject(req.error);
+        });
+      }
+
+      function styleTabButton(button, active) {
+        if (button.classList.contains("desktop-tab")) {
+          button.classList.toggle("bg-moss", active);
+          button.classList.toggle("text-white", active);
+          button.classList.toggle("border-moss", active);
+          button.classList.toggle("bg-white", !active);
+          button.classList.toggle("text-ink", !active);
+          button.classList.toggle("border-sage", !active);
+        } else {
+          button.classList.toggle("text-moss", active);
+          button.classList.toggle("border-b-2", active);
+          button.classList.toggle("border-moss", active);
+          button.classList.toggle("text-ink/70", !active);
+        }
+      }
+
+      function setTab(target) {
+        mobileTabs.forEach((tab) =>
+          styleTabButton(tab, tab.dataset.tab === target),
+        );
+        desktopTabs.forEach((tab) =>
+          styleTabButton(tab, tab.dataset.tab === target),
+        );
+        panels.forEach((panel) =>
+          panel.classList.toggle("hidden", panel.dataset.panel !== target),
+        );
+      let selectedAvatar = localStorage.getItem("vibeAvatar") || "🌱";
+
+      function setTab(target) {
+        tabs.forEach((tab) => {
+          const active = tab.dataset.tab === target;
+          tab.classList.toggle("text-moss", active);
+          tab.classList.toggle("text-ink/70", !active);
+          tab.classList.toggle("border-b-2", active);
+          tab.classList.toggle("border-moss", active);
+        });
+        panels.forEach((panel) => {
+          panel.classList.toggle("hidden", panel.dataset.panel !== target);
+        });
+      }
+
+      function refreshAvatarUI() {
+        avatars.forEach((button) => {
+          const active = button.dataset.avatar === selectedAvatar;
+          button.classList.toggle("border-moss", active);
+          button.classList.toggle("bg-mint", active);
+        });
+      }
+
+      async function syncProfile() {
+        const name = (await dbGet("vibeName")) || "New learner";
+        selectedAvatar = (await dbGet("vibeAvatar")) || "🌱";
+        const avatar = (await dbGet("vibeAvatar")) || "🌱";
+        selectedAvatar = avatar;
+        welcomeName.textContent = `Hi ${name} ${selectedAvatar}`;
+        profilePreview.textContent = `${selectedAvatar} ${name}`;
+        nameInput.value = name === "New learner" ? "" : name;
+        refreshAvatarUI();
+      }
+
+      async function syncLessons() {
+        let done = 0;
+        for (const lesson of lessons) {
+          const checked = (await dbGet(lesson.dataset.lesson)) === "1";
+          lesson.checked = checked;
+          if (checked) done += 1;
+        }
+          const isDone = (await dbGet(lesson.dataset.lesson)) === "1";
+          lesson.checked = isDone;
+          if (isDone) done += 1;
+        }
+      function syncProfile() {
+        const name = localStorage.getItem("vibeName") || "New learner";
+        welcomeName.textContent = `Hi ${name} ${selectedAvatar}`;
+        profilePreview.textContent = `${selectedAvatar} ${name}`;
+        nameInput.value = name === "New learner" ? "" : name;
+      }
+
+      function syncLessons() {
+        let done = 0;
+        lessons.forEach((lesson) => {
+          const isDone = localStorage.getItem(lesson.dataset.lesson) === "1";
+          lesson.checked = isDone;
+          if (isDone) done += 1;
+        });
+        progressText.textContent = `${done} / ${lessons.length} lessons done`;
+        progressBar.style.width = `${(done / lessons.length) * 100}%`;
+      }
+
+      [...mobileTabs, ...desktopTabs].forEach((tab) => {
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => setTab(tab.dataset.tab));
+      });
+
+      document
+        .querySelector(".goUser")
+        .addEventListener("click", () => setTab("user"));
+
+      lessons.forEach((lesson) => {
+        lesson.addEventListener("change", async () => {
+          await dbSet(lesson.dataset.lesson, lesson.checked ? "1" : "0");
+      lessons.forEach((lesson) => {
+        lesson.addEventListener("change", () => {
+          localStorage.setItem(
+            lesson.dataset.lesson,
+            lesson.checked ? "1" : "0",
+          );
+          syncLessons();
+        });
+      });
+
+      avatars.forEach((button) => {
+        button.addEventListener("click", async () => {
+          selectedAvatar = button.dataset.avatar;
+          await dbSet("vibeAvatar", selectedAvatar);
+        button.addEventListener("click", () => {
+          selectedAvatar = button.dataset.avatar;
+          localStorage.setItem("vibeAvatar", selectedAvatar);
+          refreshAvatarUI();
+          syncProfile();
+        });
+      });
+
+      createUserCard.addEventListener("click", async () => {
+        await dbSet(
+          "vibeName",
+          (nameInput.value || "").trim() || "New learner",
+        );
+        const cleanName = (nameInput.value || "").trim();
+        await dbSet("vibeName", cleanName || "New learner");
+        await dbSet("vibeAvatar", selectedAvatar);
+        syncProfile();
+      });
+
+      function runEntranceAnimation() {
+        if (isDesktopMode()) {
+          gsap.from("aside, .panel:not(.hidden)", {
+            duration: 0.55,
+            x: 8,
+            opacity: 0,
+            ease: "power2.out",
+          });
+        } else {
+          gsap.from(".panel:not(.hidden)", {
+            duration: 0.55,
+            y: 10,
+            opacity: 0,
+            ease: "power2.out",
+          });
+        }
+      }
+
+      async function bootstrap() {
+        try {
+          db = await openDatabase();
+          dbStatus.textContent =
+            "Storage: IndexedDB connected (free local database)";
+        } catch {
+          db = null;
+          dbStatus.textContent = "Storage: fallback to localStorage";
+        }
+
+        setTab("home");
+        await syncProfile();
+        await syncLessons();
+        runEntranceAnimation();
+      }
+
+      desktopQuery.addEventListener("change", () => runEntranceAnimation());
+      bootstrap();
+
+        gsap.from("header", {
+          duration: 0.7,
+          y: 10,
+          opacity: 0,
+          ease: "power2.out",
+        });
+        gsap.from(".rounded-2xl, .rounded-xl", {
+          duration: 0.6,
+          y: 8,
+          opacity: 0,
+          stagger: 0.04,
+          delay: 0.15,
+          ease: "power2.out",
+        });
+      }
+
+      bootstrap();
+      saveProfile.addEventListener("click", () => {
+        const cleanName = (nameInput.value || "").trim();
+        localStorage.setItem("vibeName", cleanName || "New learner");
+        syncProfile();
+      });
+
+      document
+        .querySelector(".goCourses")
+        .addEventListener("click", () => setTab("courses"));
+
+      setTab("home");
+      refreshAvatarUI();
+      syncProfile();
+      syncLessons();
+
+      gsap.from(".hero", {
+        duration: 0.8,
+        y: 18,
+        opacity: 0,
+        ease: "power2.out",
+      });
+      gsap.from(".rounded-2xl, .rounded-xl", {
+        duration: 0.6,
+        y: 10,
+        opacity: 0,
+        stagger: 0.05,
+        delay: 0.2,
+        ease: "power2.out",
+      });
+    </script>
   </body>
 </html>

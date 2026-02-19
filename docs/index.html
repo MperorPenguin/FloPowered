@@ -5,6 +5,152 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FloPowered Vibe Coding Academy</title>
     <link rel="stylesheet" href="./tailwind.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body class="bg-mint font-sans text-ink antialiased">
+    <main class="mx-auto min-h-screen w-full max-w-7xl p-3 sm:p-6">
+      <div
+        class="overflow-hidden rounded-3xl border border-sage bg-white shadow-soft"
+      >
+        <header class="border-b border-sage px-4 py-4 sm:px-6">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div
+                class="flex h-12 w-12 items-center justify-center rounded-xl border border-sage bg-[#f1ede5]"
+                aria-label="FloPowered logo"
+                title="FloPowered"
+              >
+                <svg
+                  viewBox="0 0 100 100"
+                  class="h-9 w-9"
+                  role="img"
+                  aria-hidden="true"
+                >
+                  <defs>
+                    <linearGradient
+                      id="floBall"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="100%"
+                    >
+                      <stop offset="0%" stop-color="#303843" />
+                      <stop offset="100%" stop-color="#0f1724" />
+                    </linearGradient>
+                  </defs>
+                  <ellipse cx="50" cy="28" rx="8" ry="20" fill="#95a58f" />
+                  <ellipse
+                    cx="36"
+                    cy="34"
+                    rx="7"
+                    ry="17"
+                    transform="rotate(-28 36 34)"
+                    fill="#7f9588"
+                  />
+                  <ellipse
+                    cx="64"
+                    cy="34"
+                    rx="7"
+                    ry="17"
+                    transform="rotate(28 64 34)"
+                    fill="#9cb8b5"
+                  />
+                  <ellipse
+                    cx="28"
+                    cy="45"
+                    rx="7"
+                    ry="14"
+                    transform="rotate(-52 28 45)"
+                    fill="#c9b7a3"
+                  />
+                  <ellipse
+                    cx="72"
+                    cy="45"
+                    rx="7"
+                    ry="14"
+                    transform="rotate(52 72 45)"
+                    fill="#b6947f"
+                  />
+                  <circle cx="50" cy="68" r="23" fill="url(#floBall)" />
+                </svg>
+              </div>
+              <div>
+                <p
+                  class="text-xs font-semibold uppercase tracking-[0.18em] text-moss"
+                >
+                  FloPowered
+                </p>
+                <h1 class="text-lg font-semibold sm:text-xl">
+                  Vibe Coding Academy
+                </h1>
+              </div>
+            </div>
+            <div class="text-right">
+              <p id="welcomeName" class="text-sm font-medium">Hi there 👋</p>
+              <p class="text-xs text-ink/60">Your learning journey: A → Z</p>
+            </div>
+          </div>
+          <div class="mt-3 rounded-xl border border-sage bg-mint/60 p-3">
+            <p class="text-sm font-medium">Journey Progress</p>
+            <p id="progressText" class="mt-1 text-xs text-ink/70">
+              0 / 24 steps completed
+            </p>
+            <div class="mt-2 h-2 rounded-full bg-sage/60">
+              <div id="progressBar" class="h-2 w-0 rounded-full bg-moss"></div>
+            </div>
+            <p id="dbStatus" class="mt-2 text-xs text-ink/60">
+              Storage: connecting…
+            </p>
+          </div>
+        </header>
+
+        <section class="grid gap-4 p-4 sm:p-6 lg:grid-cols-[260px_1fr]">
+          <aside
+            class="hidden rounded-2xl border border-sage bg-mint/40 p-3 lg:block"
+          >
+            <p
+              class="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-moss"
+            >
+              Journey map
+            </p>
+            <nav class="space-y-2">
+              <button
+                class="desktop-tab w-full rounded-xl border px-3 py-2 text-left text-sm"
+                data-tab="home"
+              >
+                1. Start Here
+              </button>
+              <button
+                class="desktop-tab w-full rounded-xl border px-3 py-2 text-left text-sm"
+                data-tab="profile"
+              >
+                2. Learner Card
+              </button>
+              <button
+                class="desktop-tab w-full rounded-xl border px-3 py-2 text-left text-sm"
+                data-tab="library"
+              >
+                3. Course Library
+              </button>
+              <button
+                class="desktop-tab w-full rounded-xl border px-3 py-2 text-left text-sm"
+                data-tab="studio"
+              >
+                4. Learning Studio
+              </button>
+              <button
+                class="desktop-tab w-full rounded-xl border px-3 py-2 text-left text-sm"
+                data-tab="practice"
+              >
+                5. Practice Lab
+              </button>
+              <button
+                class="desktop-tab w-full rounded-xl border px-3 py-2 text-left text-sm"
+                data-tab="resources"
+              >
+                6. Resources
+              </button>
+            </nav>
     <style>
       .fade-in {
         animation: fadeIn 0.35s ease-out;
@@ -1119,6 +1265,40 @@
 
           <section class="rounded-2xl border border-sage bg-white">
             <nav
+              class="grid grid-cols-3 border-b border-sage text-[11px] sm:grid-cols-6 sm:text-sm lg:hidden"
+            >
+              <button class="mobile-tab px-2 py-3 font-medium" data-tab="home">
+                Start
+              </button>
+              <button
+                class="mobile-tab px-2 py-3 font-medium"
+                data-tab="profile"
+              >
+                Card
+              </button>
+              <button
+                class="mobile-tab px-2 py-3 font-medium"
+                data-tab="library"
+              >
+                Courses
+              </button>
+              <button
+                class="mobile-tab px-2 py-3 font-medium"
+                data-tab="studio"
+              >
+                Learn
+              </button>
+              <button
+                class="mobile-tab px-2 py-3 font-medium"
+                data-tab="practice"
+              >
+                Practice
+              </button>
+              <button
+                class="mobile-tab px-2 py-3 font-medium"
+                data-tab="resources"
+              >
+                Links
               class="grid grid-cols-4 border-b border-sage text-xs sm:text-sm"
             >
               <button
@@ -1155,6 +1335,33 @@
 
             <div class="p-4 sm:p-6">
               <section class="panel" data-panel="home">
+                <h2 class="text-2xl font-semibold">
+                  Welcome — this is your full learning journey
+                </h2>
+                <p class="mt-2 text-sm text-ink/75">
+                  You will go through named courses, each with written lessons
+                  and practical work. Pick one course, learn, practice, and move
+                  forward.
+                </p>
+                <div class="mt-4 grid gap-3 md:grid-cols-3">
+                  <article class="rounded-xl border border-sage bg-mint/50 p-3">
+                    <p class="font-medium">A. Understand</p>
+                    <p class="mt-1 text-sm text-ink/75">
+                      What vibe coding is and how to work safely with AI
+                      support.
+                    </p>
+                  </article>
+                  <article class="rounded-xl border border-sage bg-mint/50 p-3">
+                    <p class="font-medium">B. Build</p>
+                    <p class="mt-1 text-sm text-ink/75">
+                      Use guided instructions to build and improve real
+                      features.
+                    </p>
+                  </article>
+                  <article class="rounded-xl border border-sage bg-mint/50 p-3">
+                    <p class="font-medium">C. Ship</p>
+                    <p class="mt-1 text-sm text-ink/75">
+                      Finish a harder final app with confidence and structure.
                 <h3 class="text-xl font-semibold">
                   Welcome to your guided app journey
                 </h3>
@@ -1185,6 +1392,86 @@
                   </article>
                 </div>
                 <button
+                  class="goProfile mt-4 rounded-xl bg-moss px-4 py-2 text-sm font-semibold text-white hover:bg-forest"
+                >
+                  Create learner card
+                </button>
+              </section>
+
+              <section class="panel hidden" data-panel="profile">
+                <h2 class="text-2xl font-semibold">Create your learner card</h2>
+                <p class="mt-2 text-sm text-ink/75">
+                  Your profile and progress are saved in a free local database
+                  in your browser.
+                </p>
+                <form
+                  class="mt-4 max-w-xl rounded-2xl border border-sage bg-mint/50 p-4"
+                  id="learnerCardForm"
+                >
+                  <label for="nameInput" class="block text-sm font-medium"
+                    >Your name</label
+                  >
+                  <input
+                    id="nameInput"
+                    name="learnerName"
+                    class="mt-1 w-full rounded-xl border border-sage bg-white px-3 py-2 text-sm outline-none focus:border-moss"
+                    placeholder="Type your name"
+                  />
+                  <fieldset class="mt-3">
+                    <legend class="text-sm font-medium">Pick avatar</legend>
+                    <div
+                      id="avatarGrid"
+                      class="mt-2 grid grid-cols-5 gap-2 text-lg"
+                    >
+                      <button
+                        type="button"
+                        class="avatar rounded-xl border border-sage bg-white p-2"
+                        data-avatar="🌱"
+                        aria-label="Seed avatar"
+                      >
+                        🌱
+                      </button>
+                      <button
+                        type="button"
+                        class="avatar rounded-xl border border-sage bg-white p-2"
+                        data-avatar="🚀"
+                        aria-label="Rocket avatar"
+                      >
+                        🚀
+                      </button>
+                      <button
+                        type="button"
+                        class="avatar rounded-xl border border-sage bg-white p-2"
+                        data-avatar="🧠"
+                        aria-label="Brain avatar"
+                      >
+                        🧠
+                      </button>
+                      <button
+                        type="button"
+                        class="avatar rounded-xl border border-sage bg-white p-2"
+                        data-avatar="💡"
+                        aria-label="Idea avatar"
+                      >
+                        💡
+                      </button>
+                      <button
+                        type="button"
+                        class="avatar rounded-xl border border-sage bg-white p-2"
+                        data-avatar="🛠️"
+                        aria-label="Tools avatar"
+                      >
+                        🛠️
+                      </button>
+                    </div>
+                  </fieldset>
+                  <button
+                    type="submit"
+                    id="createUserCard"
+                    class="mt-4 w-full rounded-xl bg-moss px-4 py-2 text-sm font-semibold text-white hover:bg-forest"
+                  >
+                    Save learner card
+                  </button>
                   class="goUser mt-4 rounded-xl bg-moss px-4 py-2 text-sm font-semibold text-white hover:bg-forest"
                 >
                   Create user card
@@ -1258,6 +1545,182 @@
                       🌱 New learner
                     </p>
                   </div>
+                </form>
+              </section>
+
+              <section class="panel hidden" data-panel="library">
+                <h2 class="text-2xl font-semibold">Course Library</h2>
+                <p class="mt-2 text-sm text-ink/75">
+                  Select one course to begin. You can always return and pick
+                  another.
+                </p>
+                <div
+                  id="courseList"
+                  class="mt-4 grid gap-3 xl:grid-cols-2"
+                ></div>
+              </section>
+
+              <section class="panel hidden" data-panel="studio">
+                <h2 class="text-2xl font-semibold">Learning Studio</h2>
+                <p class="mt-2 text-sm text-ink/75">
+                  Read each segment, then complete the mini check before moving
+                  on.
+                </p>
+                <div class="mt-4 rounded-2xl border border-sage bg-mint/50 p-4">
+                  <div
+                    class="flex flex-wrap items-center justify-between gap-2"
+                  >
+                    <h3 id="studioCourseTitle" class="text-lg font-semibold">
+                      Select a course first
+                    </h3>
+                    <span
+                      id="studioLevel"
+                      class="rounded-full border border-sage bg-white px-3 py-1 text-xs font-medium"
+                      >Level</span
+                    >
+                  </div>
+                  <p id="studioOverview" class="mt-2 text-sm text-ink/75">
+                    Go to Course Library and choose a course.
+                  </p>
+                  <div class="mt-4 rounded-xl border border-sage bg-white p-3">
+                    <p id="segmentCounter" class="text-xs text-ink/60">
+                      Segment 0 / 0
+                    </p>
+                    <h4 id="segmentTitle" class="mt-1 text-base font-semibold">
+                      No segment selected
+                    </h4>
+                    <p id="segmentContent" class="mt-2 text-sm text-ink/80">
+                      Select a course to load lessons.
+                    </p>
+                    <label
+                      class="mt-3 block text-sm font-medium"
+                      for="segmentTask"
+                      >Your quick notes for this segment</label
+                    >
+                    <textarea
+                      id="segmentTask"
+                      class="mt-1 h-28 w-full rounded-xl border border-sage bg-white p-2 text-sm"
+                      placeholder="Write what you learned and what you will try."
+                    ></textarea>
+                  </div>
+                  <div class="mt-3 flex flex-wrap gap-2">
+                    <button
+                      id="prevSegment"
+                      class="rounded-xl border border-sage bg-white px-4 py-2 text-sm"
+                    >
+                      Previous segment
+                    </button>
+                    <button
+                      id="completeSegment"
+                      class="rounded-xl bg-moss px-4 py-2 text-sm font-semibold text-white hover:bg-forest"
+                    >
+                      Complete segment
+                    </button>
+                    <button
+                      id="nextSegment"
+                      class="rounded-xl border border-sage bg-white px-4 py-2 text-sm"
+                    >
+                      Next segment
+                    </button>
+                  </div>
+                </div>
+              </section>
+
+              <section class="panel hidden" data-panel="practice">
+                <h2 class="text-2xl font-semibold">Practice Lab</h2>
+                <p class="mt-2 text-sm text-ink/75">
+                  Do practical work for the selected course. Tick each task when
+                  complete.
+                </p>
+                <div class="mt-4 rounded-2xl border border-sage bg-mint/50 p-4">
+                  <h3 id="practiceCourseTitle" class="text-lg font-semibold">
+                    No course selected
+                  </h3>
+                  <p id="practiceObjective" class="mt-1 text-sm text-ink/80">
+                    Choose a course to get practical instructions.
+                  </p>
+                  <ol
+                    id="practiceSteps"
+                    class="mt-3 list-decimal space-y-2 pl-5 text-sm"
+                  ></ol>
+                  <div class="mt-3 rounded-xl border border-sage bg-white p-3">
+                    <p class="text-sm font-medium">Practice checklist</p>
+                    <div
+                      id="practiceChecklist"
+                      class="mt-2 space-y-2 text-sm"
+                    ></div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="panel hidden" data-panel="resources">
+                <h2 class="text-2xl font-semibold">Resources and next steps</h2>
+                <p class="mt-2 text-sm text-ink/75">
+                  Use these references while learning and building your
+                  projects.
+                </p>
+                <ul class="mt-4 space-y-2 text-sm text-ink/80">
+                  <li>
+                    <a
+                      class="text-moss underline"
+                      href="https://docs.github.com/en/copilot"
+                      target="_blank"
+                      rel="noreferrer"
+                      >GitHub Copilot docs</a
+                    >
+                    — practical AI coding help patterns.
+                  </li>
+                  <li>
+                    <a
+                      class="text-moss underline"
+                      href="https://code.visualstudio.com/docs"
+                      target="_blank"
+                      rel="noreferrer"
+                      >VS Code docs</a
+                    >
+                    — editor setup and debugging workflows.
+                  </li>
+                  <li>
+                    <a
+                      class="text-moss underline"
+                      href="https://platform.openai.com/docs"
+                      target="_blank"
+                      rel="noreferrer"
+                      >OpenAI API docs</a
+                    >
+                    — model prompting and structured outputs.
+                  </li>
+                  <li>
+                    <a
+                      class="text-moss underline"
+                      href="https://ai.google.dev/gemini-api/docs"
+                      target="_blank"
+                      rel="noreferrer"
+                      >Gemini API docs</a
+                    >
+                    — model usage and examples.
+                  </li>
+                  <li>
+                    <a
+                      class="text-moss underline"
+                      href="https://docs.anthropic.com"
+                      target="_blank"
+                      rel="noreferrer"
+                      >Anthropic Claude docs</a
+                    >
+                    — prompts and safety practices.
+                  </li>
+                  <li>
+                    <a
+                      class="text-moss underline"
+                      href="https://ollama.com/library"
+                      target="_blank"
+                      rel="noreferrer"
+                      >Ollama model library</a
+                    >
+                    — local model workflows.
+                  </li>
+                </ul>
                 </div>
               </section>
 

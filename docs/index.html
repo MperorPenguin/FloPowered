@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FloPowered Vibe Coding Academy</title>
     <title>Flow Powered Vibe Coding Academy</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -43,6 +44,100 @@
         <header
           class="flex items-center justify-between border-b border-sage px-4 py-3 sm:px-6"
         >
+          <div class="flex items-center gap-3">
+            <div
+              class="flex h-12 w-12 items-center justify-center rounded-xl border border-sage bg-[#f1ede5]"
+              aria-label="FloPowered logo"
+              title="FloPowered"
+            >
+              <svg
+                viewBox="0 0 100 100"
+                class="h-9 w-9"
+                role="img"
+                aria-hidden="true"
+              >
+                <defs>
+                  <linearGradient
+                    id="floBall"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="100%"
+                  >
+                    <stop offset="0%" stop-color="#303843" />
+                    <stop offset="100%" stop-color="#0f1724" />
+                  </linearGradient>
+                </defs>
+                <ellipse cx="50" cy="28" rx="8" ry="20" fill="#95a58f" />
+                <ellipse
+                  cx="36"
+                  cy="34"
+                  rx="7"
+                  ry="17"
+                  transform="rotate(-28 36 34)"
+                  fill="#7f9588"
+                />
+                <ellipse
+                  cx="64"
+                  cy="34"
+                  rx="7"
+                  ry="17"
+                  transform="rotate(28 64 34)"
+                  fill="#9cb8b5"
+                />
+                <ellipse
+                  cx="28"
+                  cy="45"
+                  rx="7"
+                  ry="14"
+                  transform="rotate(-52 28 45)"
+                  fill="#c9b7a3"
+                />
+                <ellipse
+                  cx="72"
+                  cy="45"
+                  rx="7"
+                  ry="14"
+                  transform="rotate(52 72 45)"
+                  fill="#b6947f"
+                />
+                <circle cx="50" cy="68" r="23" fill="url(#floBall)" />
+              </svg>
+            </div>
+            <div>
+              <p
+                class="text-xs font-semibold uppercase tracking-[0.18em] text-moss"
+              >
+                FloPowered
+              </p>
+              <h1 class="text-lg font-semibold sm:text-xl">
+                Vibe Coding Academy
+              </h1>
+            </div>
+          </div>
+          <div class="text-right">
+            <p id="welcomeName" class="text-sm font-medium">Hi there 👋</p>
+            <p class="text-xs text-ink/60">Gentle, simple, guided</p>
+          </div>
+        </header>
+
+        <section class="p-4 sm:p-6">
+          <div class="mb-4 rounded-xl border border-sage bg-mint/60 p-3">
+            <p class="text-sm font-medium">Learning progress</p>
+            <p id="progressText" class="mt-1 text-xs text-ink/70">
+              0 / 16 lessons done
+            </p>
+            <div class="mt-2 h-2 rounded-full bg-sage/60">
+              <div id="progressBar" class="h-2 w-0 rounded-full bg-moss"></div>
+            </div>
+            <p id="dbStatus" class="mt-2 text-xs text-ink/60">
+              Storage: connecting…
+            </p>
+          </div>
+
+          <section class="rounded-2xl border border-sage bg-white">
+            <nav
+              class="grid grid-cols-5 border-b border-sage text-[11px] sm:text-sm"
           <div>
             <p
               class="text-xs font-semibold uppercase tracking-[0.18em] text-moss"
@@ -147,6 +242,12 @@
               </button>
               <button
                 class="tab px-2 py-3 font-medium text-ink/70"
+                data-tab="user"
+              >
+                User Card
+              </button>
+              <button
+                class="tab px-2 py-3 font-medium text-ink/70"
                 data-tab="courses"
               >
                 Courses
@@ -171,6 +272,8 @@
                   Welcome to your guided app journey
                 </h3>
                 <p class="mt-2 text-sm text-ink/75">
+                  Go one tab at a time. No rush. This academy starts from zero
+                  and teaches slowly.
                   This is not a long page. It works like an app. Go one tab at a
                   time. No rush. You can do this.
                 </p>
@@ -178,6 +281,8 @@
                   <article class="rounded-xl border border-sage bg-mint/50 p-3">
                     <p class="font-medium">What you'll learn</p>
                     <p class="mt-1 text-sm text-ink/75">
+                      How to use Llama, Claude, Gemini, and GPT with both
+                      friendly tools and backend methods.
                       How to use Llama, Claude, Gemini, and GPT with friendly
                       tools and direct backend methods.
                     </p>
@@ -185,12 +290,90 @@
                   <article class="rounded-xl border border-sage bg-mint/50 p-3">
                     <p class="font-medium">How you'll learn</p>
                     <p class="mt-1 text-sm text-ink/75">
+                      Tiny lessons, easy words, and clear tasks for phone and
+                      desktop.
                       Tiny lessons, kind wording, checkboxes, and practical
                       tasks for phone or desktop.
                     </p>
                   </article>
                 </div>
                 <button
+                  class="goUser mt-4 rounded-xl bg-moss px-4 py-2 text-sm font-semibold text-white hover:bg-forest"
+                >
+                  Create user card
+                </button>
+              </section>
+
+              <section class="panel hidden" data-panel="user">
+                <h3 class="text-xl font-semibold">Create your user card</h3>
+                <p class="mt-2 text-sm text-ink/75">
+                  This saves your name, avatar, and progress in a free local
+                  browser database (IndexedDB).
+                </p>
+
+                <div class="mt-4 rounded-2xl border border-sage bg-mint/50 p-4">
+                  <label class="block text-sm font-medium">Your name</label>
+                  <input
+                    id="nameInput"
+                    class="mt-1 w-full rounded-xl border border-sage bg-white px-3 py-2 text-sm outline-none focus:border-moss"
+                    placeholder="Type your name"
+                  />
+
+                  <p class="mt-3 text-sm font-medium">Pick avatar</p>
+                  <div
+                    id="avatarGrid"
+                    class="mt-2 grid grid-cols-5 gap-2 text-lg"
+                  >
+                    <button
+                      class="avatar rounded-xl border border-sage bg-white p-2"
+                      data-avatar="🌱"
+                    >
+                      🌱
+                    </button>
+                    <button
+                      class="avatar rounded-xl border border-sage bg-white p-2"
+                      data-avatar="🚀"
+                    >
+                      🚀
+                    </button>
+                    <button
+                      class="avatar rounded-xl border border-sage bg-white p-2"
+                      data-avatar="🧠"
+                    >
+                      🧠
+                    </button>
+                    <button
+                      class="avatar rounded-xl border border-sage bg-white p-2"
+                      data-avatar="💡"
+                    >
+                      💡
+                    </button>
+                    <button
+                      class="avatar rounded-xl border border-sage bg-white p-2"
+                      data-avatar="🛠️"
+                    >
+                      🛠️
+                    </button>
+                  </div>
+
+                  <button
+                    id="createUserCard"
+                    class="mt-4 w-full rounded-xl bg-moss px-4 py-2 text-sm font-semibold text-white hover:bg-forest"
+                  >
+                    Create user card
+                  </button>
+
+                  <div
+                    class="mt-4 rounded-xl border border-moss/20 bg-white p-3"
+                  >
+                    <p class="text-xs text-ink/60">Profile preview</p>
+                    <p id="profilePreview" class="mt-1 text-sm font-medium">
+                      🌱 New learner
+                    </p>
+                  </div>
+                </div>
+              </section>
+
                   class="goCourses mt-4 rounded-xl bg-moss px-4 py-2 text-sm font-semibold text-white hover:bg-forest"
                 >
                   Start with Course 1
@@ -393,6 +576,7 @@
               <section class="panel hidden" data-panel="toolkit">
                 <h3 class="text-xl font-semibold">Toolkit (simple words)</h3>
                 <p class="mt-2 text-sm text-ink/75">
+                  Use UI tools when you want comfort. Use backend tools when you
                   Use pretty tools when you want. Use backend tools when you
                   want speed and control.
                 </p>
@@ -429,6 +613,11 @@
                         <strong>Anti-Gravity CLI:</strong> strong terminal
                         workflow.
                       </li>
+                      <li><strong>Cursor:</strong> smooth editor guidance.</li>
+                      <li><strong>VS Code:</strong> familiar and flexible.</li>
+                    </ul>
+                  </article>
+                </div>
                       <li>
                         <strong>Cursor:</strong> very smooth editor guidance.
                       </li>
@@ -515,12 +704,56 @@ python app.py</pre
       const panels = document.querySelectorAll(".panel");
       const lessons = document.querySelectorAll(".lesson");
       const nameInput = document.getElementById("nameInput");
+      const createUserCard = document.getElementById("createUserCard");
       const saveProfile = document.getElementById("saveProfile");
       const welcomeName = document.getElementById("welcomeName");
       const profilePreview = document.getElementById("profilePreview");
       const avatars = document.querySelectorAll(".avatar");
       const progressText = document.getElementById("progressText");
       const progressBar = document.getElementById("progressBar");
+      const dbStatus = document.getElementById("dbStatus");
+
+      let selectedAvatar = "🌱";
+      let db = null;
+
+      function openDatabase() {
+        return new Promise((resolve, reject) => {
+          const request = indexedDB.open("floPoweredAcademyDB", 1);
+          request.onupgradeneeded = (event) => {
+            const database = event.target.result;
+            if (!database.objectStoreNames.contains("kv")) {
+              database.createObjectStore("kv", { keyPath: "key" });
+            }
+          };
+          request.onsuccess = () => resolve(request.result);
+          request.onerror = () => reject(request.error);
+        });
+      }
+
+      function dbSet(key, value) {
+        if (!db) {
+          localStorage.setItem(key, value);
+          return Promise.resolve();
+        }
+        return new Promise((resolve, reject) => {
+          const tx = db.transaction("kv", "readwrite");
+          tx.objectStore("kv").put({ key, value });
+          tx.oncomplete = () => resolve();
+          tx.onerror = () => reject(tx.error);
+        });
+      }
+
+      function dbGet(key) {
+        if (!db) {
+          return Promise.resolve(localStorage.getItem(key));
+        }
+        return new Promise((resolve, reject) => {
+          const tx = db.transaction("kv", "readonly");
+          const req = tx.objectStore("kv").get(key);
+          req.onsuccess = () => resolve(req.result ? req.result.value : null);
+          req.onerror = () => reject(req.error);
+        });
+      }
       let selectedAvatar = localStorage.getItem("vibeAvatar") || "🌱";
 
       function setTab(target) {
@@ -544,6 +777,23 @@ python app.py</pre
         });
       }
 
+      async function syncProfile() {
+        const name = (await dbGet("vibeName")) || "New learner";
+        const avatar = (await dbGet("vibeAvatar")) || "🌱";
+        selectedAvatar = avatar;
+        welcomeName.textContent = `Hi ${name} ${selectedAvatar}`;
+        profilePreview.textContent = `${selectedAvatar} ${name}`;
+        nameInput.value = name === "New learner" ? "" : name;
+        refreshAvatarUI();
+      }
+
+      async function syncLessons() {
+        let done = 0;
+        for (const lesson of lessons) {
+          const isDone = (await dbGet(lesson.dataset.lesson)) === "1";
+          lesson.checked = isDone;
+          if (isDone) done += 1;
+        }
       function syncProfile() {
         const name = localStorage.getItem("vibeName") || "New learner";
         welcomeName.textContent = `Hi ${name} ${selectedAvatar}`;
@@ -566,6 +816,13 @@ python app.py</pre
         tab.addEventListener("click", () => setTab(tab.dataset.tab));
       });
 
+      document
+        .querySelector(".goUser")
+        .addEventListener("click", () => setTab("user"));
+
+      lessons.forEach((lesson) => {
+        lesson.addEventListener("change", async () => {
+          await dbSet(lesson.dataset.lesson, lesson.checked ? "1" : "0");
       lessons.forEach((lesson) => {
         lesson.addEventListener("change", () => {
           localStorage.setItem(
@@ -577,6 +834,9 @@ python app.py</pre
       });
 
       avatars.forEach((button) => {
+        button.addEventListener("click", async () => {
+          selectedAvatar = button.dataset.avatar;
+          await dbSet("vibeAvatar", selectedAvatar);
         button.addEventListener("click", () => {
           selectedAvatar = button.dataset.avatar;
           localStorage.setItem("vibeAvatar", selectedAvatar);
@@ -585,6 +845,44 @@ python app.py</pre
         });
       });
 
+      createUserCard.addEventListener("click", async () => {
+        const cleanName = (nameInput.value || "").trim();
+        await dbSet("vibeName", cleanName || "New learner");
+        await dbSet("vibeAvatar", selectedAvatar);
+        syncProfile();
+      });
+
+      async function bootstrap() {
+        try {
+          db = await openDatabase();
+          dbStatus.textContent =
+            "Storage: IndexedDB connected (free local database)";
+        } catch {
+          db = null;
+          dbStatus.textContent = "Storage: fallback to localStorage";
+        }
+
+        setTab("home");
+        await syncProfile();
+        await syncLessons();
+
+        gsap.from("header", {
+          duration: 0.7,
+          y: 10,
+          opacity: 0,
+          ease: "power2.out",
+        });
+        gsap.from(".rounded-2xl, .rounded-xl", {
+          duration: 0.6,
+          y: 8,
+          opacity: 0,
+          stagger: 0.04,
+          delay: 0.15,
+          ease: "power2.out",
+        });
+      }
+
+      bootstrap();
       saveProfile.addEventListener("click", () => {
         const cleanName = (nameInput.value || "").trim();
         localStorage.setItem("vibeName", cleanName || "New learner");

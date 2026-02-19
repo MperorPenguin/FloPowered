@@ -1,10 +1,10 @@
 services:
   - type: redis
-    name: nog-redis
+    name: flopowered-redis
     ipAllowList: []
 
   - type: web
-    name: nog-renderer
+    name: flopowered-renderer
     env: node
     rootDir: apps/renderer
     buildCommand: npm ci
@@ -15,7 +15,7 @@ services:
         value: 20
 
   - type: web
-    name: nog-api
+    name: flopowered-api
     env: python
     rootDir: apps/api
     buildCommand: pip install -r requirements.txt
@@ -25,21 +25,21 @@ services:
       - key: REDIS_URL
         fromService:
           type: redis
-          name: nog-redis
+          name: flopowered-redis
           property: connectionString
       - key: RENDERER_URL
-        value: https://nog-renderer.onrender.com
+        value: https://flopowered-renderer.onrender.com
       - key: OPENAI_API_KEY
         sync: false
 
   - type: web
-    name: nog-web
+    name: flopowered-web
     env: node
     rootDir: apps/web
     buildCommand: npm ci && npm run build
     startCommand: npm run start -- --port $PORT
     envVars:
       - key: NEXT_PUBLIC_API_URL
-        value: https://nog-api.onrender.com/api
+        value: https://flopowered-api.onrender.com/api
       - key: NODE_VERSION
         value: 20

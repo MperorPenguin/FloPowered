@@ -5,6 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FloPowered Vibe Coding Academy</title>
     <link rel="stylesheet" href="./tailwind.css" />
+    <style>
+      .fade-in {
+        animation: fadeIn 0.35s ease-out;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+    <script src="./app.js" defer></script>
     <title>Flow Powered Vibe Coding Academy</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -656,6 +672,7 @@
               </nav>
 
               <div class="p-4 sm:p-6">
+                <section class="panel fade-in" data-panel="home">
                 <section class="panel" data-panel="home">
                   <h3 class="text-2xl font-semibold">
                     Welcome to your guided app journey
@@ -700,6 +717,9 @@
                   <div
                     class="mt-4 max-w-xl rounded-2xl border border-sage bg-mint/50 p-4"
                   >
+                    <label for="nameInput" class="block text-sm font-medium"
+                      >Your name</label
+                    >
                     <label class="block text-sm font-medium">Your name</label>
                     <input
                       id="nameInput"
@@ -1557,6 +1577,9 @@ python app.py</pre
               </div>
             </section>
           </div>
+        </section>
+      </div>
+    </main>
                   >
                 </div>
               </section>

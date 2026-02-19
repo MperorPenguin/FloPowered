@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vibe Coding Academy</title>
+    <title>Vibe Coding Academy — From Zero to Shipping</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -11,9 +11,13 @@
           extend: {
             colors: {
               sage: "#dce8dd",
+              mint: "#edf6ee",
               moss: "#2f5f45",
               forest: "#1a3a2a",
               ink: "#111111",
+            },
+            boxShadow: {
+              soft: "0 16px 44px rgba(17, 17, 17, 0.08)",
             },
             fontFamily: {
               sans: [
@@ -27,28 +31,23 @@
                 "sans-serif",
               ],
             },
-            boxShadow: {
-              soft: "0 14px 40px rgba(17,17,17,0.08)",
-            },
           },
         },
       };
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   </head>
-  <body class="bg-white text-ink font-sans antialiased">
-    <main class="mx-auto max-w-6xl px-4 pb-16 pt-6 sm:px-6 lg:px-8">
+  <body class="bg-white font-sans text-ink antialiased">
+    <main class="mx-auto max-w-6xl px-4 pb-16 pt-5 sm:px-6 lg:px-8">
       <section
-        class="hero rounded-3xl border border-sage bg-gradient-to-br from-white via-sage/40 to-white p-6 shadow-soft sm:p-10"
+        class="hero rounded-3xl border border-sage bg-gradient-to-br from-white via-mint to-white p-6 shadow-soft sm:p-10"
       >
         <div class="flex flex-wrap items-center justify-between gap-3">
           <span
             class="rounded-full border border-moss/30 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-moss"
-            >Beginner Friendly</span
+            >Beginner-safe path</span
           >
-          <span class="text-sm text-ink/60"
-            >Mobile-first • Hands-on • End-to-end</span
-          >
+          <span class="text-sm text-ink/60">Mobile-first • Desktop-ready</span>
         </div>
         <h1 class="mt-5 text-3xl font-semibold leading-tight sm:text-5xl">
           Vibe Coding Academy
@@ -56,184 +55,306 @@
         <p
           class="mt-4 max-w-3xl text-base leading-relaxed text-ink/80 sm:text-lg"
         >
-          Learn how to build real apps with language models (Llama, Claude,
-          Gemini, GPT) and coding assistants in Anti-Gravity CLI, Cursor, and VS
-          Code. You will go from absolute zero to shipping a complete app.
+          A full tutorial app for complete beginners: learn to build software
+          with Llama, Claude, Gemini, GPT, plus CLIs/editors like Anti-Gravity,
+          Cursor, and VS Code. Includes backend-first workflows for PowerShell,
+          CMD, and terminal users.
         </p>
         <div class="mt-7 flex flex-wrap gap-3">
           <a
-            href="#roadmap"
+            href="#courses"
             class="rounded-xl bg-moss px-4 py-3 text-sm font-semibold text-white transition hover:bg-forest"
-            >Start the tutorial</a
+            >Start course</a
           >
           <a
-            href="#project"
+            href="#backends"
             class="rounded-xl border border-ink/15 bg-white px-4 py-3 text-sm font-semibold text-ink transition hover:border-moss/40"
-            >See the final project</a
+            >Backend methods</a
           >
         </div>
       </section>
 
+      <section class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <article class="card rounded-2xl border border-sage bg-white p-5">
+          <p class="text-sm font-semibold text-moss">Outcome 1</p>
+          <h2 class="mt-2 text-xl font-semibold">Understand</h2>
+          <p class="mt-2 text-sm text-ink/70">
+            Learn what “vibe coding” really is: intention, guardrails,
+            iteration.
+          </p>
+        </article>
+        <article class="card rounded-2xl border border-sage bg-white p-5">
+          <p class="text-sm font-semibold text-moss">Outcome 2</p>
+          <h2 class="mt-2 text-xl font-semibold">Operate</h2>
+          <p class="mt-2 text-sm text-ink/70">
+            Use frontend tools and backend terminals without confusion.
+          </p>
+        </article>
+        <article class="card rounded-2xl border border-sage bg-white p-5">
+          <p class="text-sm font-semibold text-moss">Outcome 3</p>
+          <h2 class="mt-2 text-xl font-semibold">Build</h2>
+          <p class="mt-2 text-sm text-ink/70">
+            Ship a working app with tests, logs, and a clear deployment flow.
+          </p>
+        </article>
+        <article class="card rounded-2xl border border-sage bg-white p-5">
+          <p class="text-sm font-semibold text-moss">Outcome 4</p>
+          <h2 class="mt-2 text-xl font-semibold">Grow</h2>
+          <p class="mt-2 text-sm text-ink/70">
+            Continue with a reusable method for any future project.
+          </p>
+        </article>
+      </section>
+
       <section
-        id="roadmap"
-        class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
+        id="courses"
+        class="mt-8 rounded-3xl border border-sage bg-white p-6 sm:p-8"
       >
-        <article class="card rounded-2xl border border-sage bg-white p-5">
-          <p class="text-sm font-semibold text-moss">Step 1</p>
-          <h2 class="mt-2 text-xl font-semibold">Mindset</h2>
-          <p class="mt-2 text-sm text-ink/70">
-            Understand what vibe coding is and how to prompt safely and clearly.
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <h2 class="text-2xl font-semibold">Course track (task-by-task)</h2>
+          <p class="text-sm text-ink/60">
+            Progress auto-saves in your browser on mobile/desktop.
           </p>
-        </article>
-        <article class="card rounded-2xl border border-sage bg-white p-5">
-          <p class="text-sm font-semibold text-moss">Step 2</p>
-          <h2 class="mt-2 text-xl font-semibold">Tool Setup</h2>
-          <p class="mt-2 text-sm text-ink/70">
-            Install model access, editor, and CLI workflow with practical
-            defaults.
+        </div>
+
+        <div class="mt-5 grid gap-4 lg:grid-cols-3">
+          <article class="rounded-2xl border border-sage p-4">
+            <p
+              class="text-xs font-semibold uppercase tracking-[0.16em] text-moss"
+            >
+              Course 1
+            </p>
+            <h3 class="mt-2 text-lg font-semibold">Absolute Beginner Boot</h3>
+            <ul class="mt-3 space-y-2 text-sm text-ink/80">
+              <li>
+                <label
+                  ><input
+                    type="checkbox"
+                    class="task mr-2"
+                    data-task="c1t1"
+                  />Task 1: Install one editor and one CLI.</label
+                >
+              </li>
+              <li>
+                <label
+                  ><input
+                    type="checkbox"
+                    class="task mr-2"
+                    data-task="c1t2"
+                  />Task 2: Run your first AI prompt safely.</label
+                >
+              </li>
+              <li>
+                <label
+                  ><input
+                    type="checkbox"
+                    class="task mr-2"
+                    data-task="c1t3"
+                  />Task 3: Ask model to explain every file.</label
+                >
+              </li>
+            </ul>
+          </article>
+
+          <article class="rounded-2xl border border-sage p-4">
+            <p
+              class="text-xs font-semibold uppercase tracking-[0.16em] text-moss"
+            >
+              Course 2
+            </p>
+            <h3 class="mt-2 text-lg font-semibold">Workflow Builder</h3>
+            <ul class="mt-3 space-y-2 text-sm text-ink/80">
+              <li>
+                <label
+                  ><input
+                    type="checkbox"
+                    class="task mr-2"
+                    data-task="c2t1"
+                  />Task 1: Create prompt template + constraints.</label
+                >
+              </li>
+              <li>
+                <label
+                  ><input
+                    type="checkbox"
+                    class="task mr-2"
+                    data-task="c2t2"
+                  />Task 2: Build one feature in tiny steps.</label
+                >
+              </li>
+              <li>
+                <label
+                  ><input
+                    type="checkbox"
+                    class="task mr-2"
+                    data-task="c2t3"
+                  />Task 3: Add tests and fix one failing test.</label
+                >
+              </li>
+            </ul>
+          </article>
+
+          <article class="rounded-2xl border border-sage p-4">
+            <p
+              class="text-xs font-semibold uppercase tracking-[0.16em] text-moss"
+            >
+              Course 3
+            </p>
+            <h3 class="mt-2 text-lg font-semibold">Ship and Reflect</h3>
+            <ul class="mt-3 space-y-2 text-sm text-ink/80">
+              <li>
+                <label
+                  ><input
+                    type="checkbox"
+                    class="task mr-2"
+                    data-task="c3t1"
+                  />Task 1: Deploy MVP and verify logs.</label
+                >
+              </li>
+              <li>
+                <label
+                  ><input
+                    type="checkbox"
+                    class="task mr-2"
+                    data-task="c3t2"
+                  />Task 2: Run user-style acceptance checklist.</label
+                >
+              </li>
+              <li>
+                <label
+                  ><input
+                    type="checkbox"
+                    class="task mr-2"
+                    data-task="c3t3"
+                  />Task 3: Refactor with AI code review loop.</label
+                >
+              </li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="mt-5 rounded-xl border border-moss/25 bg-mint p-4">
+          <p class="text-sm font-medium">
+            Completion: <span id="progressText">0 / 9 tasks done</span>
           </p>
-        </article>
-        <article class="card rounded-2xl border border-sage bg-white p-5">
-          <p class="text-sm font-semibold text-moss">Step 3</p>
-          <h2 class="mt-2 text-xl font-semibold">Build Loop</h2>
-          <p class="mt-2 text-sm text-ink/70">
-            Use prompt → review → run → test cycles to build features quickly.
-          </p>
-        </article>
-        <article class="card rounded-2xl border border-sage bg-white p-5">
-          <p class="text-sm font-semibold text-moss">Step 4</p>
-          <h2 class="mt-2 text-xl font-semibold">Ship</h2>
-          <p class="mt-2 text-sm text-ink/70">
-            Polish, validate, and deploy your app with confidence.
-          </p>
-        </article>
+          <div class="mt-2 h-2 rounded-full bg-white">
+            <div
+              id="progressBar"
+              class="h-2 w-0 rounded-full bg-moss transition-all duration-300"
+            ></div>
+          </div>
+        </div>
       </section>
 
-      <section class="mt-8 rounded-3xl border border-sage bg-white p-6 sm:p-8">
-        <div class="mb-5 flex items-center justify-between gap-3">
-          <h3 class="text-2xl font-semibold">Pick your stack</h3>
-          <p class="text-sm text-ink/60">Tap to compare strengths</p>
-        </div>
-        <div class="grid gap-4 md:grid-cols-2">
-          <div class="rounded-2xl border border-sage p-4">
-            <h4 class="text-lg font-semibold">Models</h4>
-            <ul class="mt-3 space-y-2 text-sm text-ink/80">
-              <li>
-                <strong>Llama:</strong> strong open ecosystem, self-host
-                flexibility.
-              </li>
-              <li>
-                <strong>Claude:</strong> long-context planning and readable code
-                edits.
-              </li>
-              <li>
-                <strong>Gemini:</strong> great multimodal workflows and docs
-                grounding.
-              </li>
-              <li>
-                <strong>GPT:</strong> balanced coding + reasoning for fast
-                iteration.
-              </li>
-            </ul>
+      <section id="backends" class="mt-8 grid gap-4 lg:grid-cols-2">
+        <article class="rounded-2xl border border-sage bg-white p-5">
+          <h3 class="text-xl font-semibold">Model backends (beyond the UI)</h3>
+          <p class="mt-2 text-sm text-ink/70">
+            You can use model APIs directly, not only editor frontends. This is
+            often faster and easier to automate.
+          </p>
+          <ul class="mt-3 space-y-2 text-sm text-ink/80">
+            <li>
+              <strong>Llama:</strong> local runtimes (e.g. Ollama) for
+              private/offline loops.
+            </li>
+            <li>
+              <strong>Claude:</strong> API + prompt files for controlled
+              long-context sessions.
+            </li>
+            <li>
+              <strong>Gemini:</strong> API + multimodal prompts for docs and
+              screenshots.
+            </li>
+            <li>
+              <strong>GPT:</strong> API for reliable coding assistants and test
+              generation.
+            </li>
+          </ul>
+        </article>
+        <article class="rounded-2xl border border-sage bg-white p-5">
+          <h3 class="text-xl font-semibold">CLI + shell paths</h3>
+          <p class="mt-2 text-sm text-ink/70">
+            Pick what you have: Anti-Gravity CLI, VS Code terminal, Windows CMD,
+            or PowerShell. The method is the same: prompt → patch → run → test.
+          </p>
+          <div class="mt-3 space-y-3 text-xs sm:text-sm">
+            <pre class="overflow-x-auto rounded-xl bg-ink p-3 text-sage">
+# PowerShell
+$env:MODEL_PROVIDER="gpt"
+$env:MODEL_API_KEY="your_key"
+python app.py</pre
+            >
+            <pre class="overflow-x-auto rounded-xl bg-ink p-3 text-sage">
+:: Windows CMD
+set MODEL_PROVIDER=gemini
+set MODEL_API_KEY=your_key
+python app.py</pre
+            >
           </div>
-          <div class="rounded-2xl border border-sage p-4">
-            <h4 class="text-lg font-semibold">Interfaces</h4>
-            <ul class="mt-3 space-y-2 text-sm text-ink/80">
-              <li>
-                <strong>Anti-Gravity CLI:</strong> terminal-native automation
-                and scripting rhythm.
-              </li>
-              <li>
-                <strong>Cursor:</strong> rapid in-editor code generation and
-                refactors.
-              </li>
-              <li>
-                <strong>VS Code:</strong> plugin-rich control with familiar
-                debugging flow.
-              </li>
-            </ul>
-          </div>
-        </div>
+        </article>
       </section>
 
       <section
-        id="project"
         class="mt-8 rounded-3xl border border-moss/20 bg-moss p-6 text-white sm:p-8"
       >
-        <h3 class="text-2xl font-semibold">Guided project: Habit Garden App</h3>
+        <h3 class="text-2xl font-semibold">
+          Guided project: StudySprint Planner
+        </h3>
         <p class="mt-2 max-w-3xl text-white/90">
-          Build a simple but complex-enough app: users add habits, track
-          streaks, and see progress charts. This teaches API design, frontend
-          state, validation, and deployment.
+          Build a practical app that plans study sessions with reminders and
+          progress stats. Complex enough to learn architecture, simple enough
+          for first-timers.
         </p>
         <ol class="mt-5 grid gap-3 md:grid-cols-2">
           <li class="rounded-xl border border-white/20 bg-white/10 p-4">
-            <strong>1. Scope:</strong> write a one-page product spec in plain
-            language.
+            <strong>1) Scope:</strong> define user story and MVP checklist.
           </li>
           <li class="rounded-xl border border-white/20 bg-white/10 p-4">
-            <strong>2. Prompt:</strong> ask model for architecture + folder
-            structure.
+            <strong>2) Data model:</strong> tasks, sessions, streaks, notes.
           </li>
           <li class="rounded-xl border border-white/20 bg-white/10 p-4">
-            <strong>3. Scaffold:</strong> generate React + Tailwind UI with
-            mobile-first layout.
+            <strong>3) Frontend:</strong> mobile cards + desktop table views.
           </li>
           <li class="rounded-xl border border-white/20 bg-white/10 p-4">
-            <strong>4. Backend:</strong> add simple REST API for habits and
-            streak logs.
+            <strong>4) Backend:</strong> REST endpoints + validation + logging.
           </li>
           <li class="rounded-xl border border-white/20 bg-white/10 p-4">
-            <strong>5. Test:</strong> auto-generate tests, then manually verify
-            each user flow.
+            <strong>5) Testing:</strong> unit tests, integration tests, manual
+            script.
           </li>
           <li class="rounded-xl border border-white/20 bg-white/10 p-4">
-            <strong>6. Ship:</strong> deploy and ask model for launch checklist
-            + bug triage.
+            <strong>6) Release:</strong> deploy + monitor + improvement plan.
           </li>
         </ol>
-      </section>
-
-      <section class="mt-8 grid gap-4 lg:grid-cols-2">
-        <div class="rounded-2xl border border-sage bg-white p-5">
-          <h3 class="text-xl font-semibold">Prompt templates</h3>
-          <pre
-            class="mt-3 overflow-x-auto rounded-xl bg-ink p-4 text-xs text-sage"
-          >
-You are my senior software coach.
-My level: absolute beginner.
-Goal: build a Habit Garden app with React + API.
-Constraints: keep files small, explain every command, test each step.
-Return: (1) plan, (2) exact commands, (3) code snippets, (4) checkpoints.</pre
-          >
-        </div>
-        <div class="rounded-2xl border border-sage bg-white p-5">
-          <h3 class="text-xl font-semibold">Simple weekly learning plan</h3>
-          <ul class="mt-3 space-y-2 text-sm text-ink/80">
-            <li>
-              <strong>Day 1:</strong> Understand prompt anatomy and project
-              scoping.
-            </li>
-            <li>
-              <strong>Day 2:</strong> Generate UI and improve
-              spacing/typography.
-            </li>
-            <li>
-              <strong>Day 3:</strong> Add backend routes and data validation.
-            </li>
-            <li>
-              <strong>Day 4:</strong> Connect frontend to backend, handle
-              errors.
-            </li>
-            <li><strong>Day 5:</strong> Write tests and performance checks.</li>
-            <li><strong>Day 6:</strong> Deploy and run a bug bash.</li>
-            <li><strong>Day 7:</strong> Reflect, refactor, and document.</li>
-          </ul>
-        </div>
       </section>
     </main>
 
     <script>
+      const tasks = [...document.querySelectorAll(".task")];
+      const progressText = document.getElementById("progressText");
+      const progressBar = document.getElementById("progressBar");
+
+      function syncTaskState() {
+        let done = 0;
+        tasks.forEach((task) => {
+          const checked = localStorage.getItem(task.dataset.task) === "1";
+          task.checked = checked;
+          if (checked) done += 1;
+        });
+        progressText.textContent = `${done} / ${tasks.length} tasks done`;
+        progressBar.style.width = `${(done / tasks.length) * 100}%`;
+      }
+
+      tasks.forEach((task) => {
+        task.addEventListener("change", () => {
+          localStorage.setItem(task.dataset.task, task.checked ? "1" : "0");
+          syncTaskState();
+        });
+      });
+
+      syncTaskState();
+
       gsap.from(".hero", {
         duration: 0.8,
         y: 20,
